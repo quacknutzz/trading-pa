@@ -69,6 +69,57 @@ def backtest_report():
     return JSONResponse({"error": "Report not generated yet"})
 
 
+@app.get("/api/fyers/status")
+def fyers_status():
+    from engine.data_engine import load_fyers_credentials
+    root_path = os.path.dirname(SIM_DIR)
+    app_id, token = load_fyers_credentials(root_path)
+    token_file = os.path.join(root_path, "fyers_tokens.json")
+    has_token = bool(app_id and token)
+    return JSONResponse({
+        "configured": os.path.exists(token_file),
+        "connected": has_token,
+        "app_id": (app_id[:4] + "***") if app_id else "",
+        "mode": "LIVE" if has_token else "PAPER",
+        "broker": "FYERS API v3",
+    })
+
+
+@app.post("/api/action")
+async def trade_action(req: Request):
+    global SIM
+    if not SIM:
+        return JSONResponse({"ok": False, "error": "Simulator not initialized"})
+    body = await req.json()
+    action = body.get("action")
+    sym = body.get("symbol")
+
+    with SIM.lock:
+        now_ts = SIM.clock or pd.Timestamp.now()
+        if action == "close_position" and sym in SIM.open:
+            p = SIM.open[sym]
+            SIM._close(sym, p["ltp"], now_ts, "MANUAL_TERMINAL_EXIT", market=True)
+            return JSONResponse({"ok": True, "message": f"Closed position in {sym}"})
+        elif action == "panic_close_all":
+            closed_syms = []
+            for s in list(SIM.open.keys()):
+                p = SIM.open[s]
+                SIM._close(s, p["ltp"], now_ts, "PANIC_KILL_SWITCH", market=True)
+                closed_syms.append(s)
+            SIM.pending.clear()
+            return JSONResponse({"ok": True, "message": f"Panic closed {len(closed_syms)} positions and cleared pending orders", "closed": closed_syms})
+        elif action == "move_sl_cost" and sym in SIM.open:
+            p = SIM.open[sym]
+            p["sl"] = p["entry"]
+            p["sl_state"] = "MANUAL_COST_LOCK"
+            return JSONResponse({"ok": True, "message": f"Moved SL to entry price (₹{p['entry']:.2f}) for {sym}"})
+        elif action == "cancel_pending" and sym in SIM.pending:
+            SIM.pending.pop(sym, None)
+            return JSONResponse({"ok": True, "message": f"Cancelled pending limit order for {sym}"})
+    return JSONResponse({"ok": False, "error": "Invalid action or target symbol not active"})
+
+
+
 @app.post("/api/control")
 async def control(req: Request):
     """Switch strategy preset, replay date, capital, or live/replay mode on the fly from the browser UI."""
