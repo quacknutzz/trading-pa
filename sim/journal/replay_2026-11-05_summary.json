@@ -12,7 +12,7 @@
   "signals": 43,
   "universe": 139
  },
- "strategy": "v6_profit_max",
+ "strategy": "quacknutzz_strat",
  "config": {
   "sl_pct": 0.01,
   "tgt_pct": 0.012,

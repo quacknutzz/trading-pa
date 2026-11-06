@@ -30,11 +30,24 @@ import datafeed
 from simulator import Simulator, BAR
 
 from fastapi import FastAPI, Request
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, HTMLResponse, RedirectResponse
 import uvicorn
 
 OUT_DIR = os.path.join(SIM_DIR, "journal")
 CACHE_FILE = os.path.join(SIM_DIR, "cache", "nse_5m_60d.pkl")
+TIMELINE_CACHE_FILE = os.path.join(OUT_DIR, "quacknutzz_timeline_cache.json")
+TIMELINE_CACHE = {}
+
+def get_timeline_cache():
+    global TIMELINE_CACHE
+    if not TIMELINE_CACHE and os.path.exists(TIMELINE_CACHE_FILE):
+        try:
+            with open(TIMELINE_CACHE_FILE, "r", encoding="utf-8") as f:
+                TIMELINE_CACHE = json.load(f)
+        except Exception:
+            TIMELINE_CACHE = {}
+    return TIMELINE_CACHE
+
 os.makedirs(OUT_DIR, exist_ok=True)
 
 app = FastAPI()
@@ -84,13 +97,161 @@ def fyers_status():
     app_id, token = load_fyers_credentials(root_path)
     token_file = os.path.join(root_path, "fyers_tokens.json")
     has_token = bool(app_id and token)
+    name = ""
+    fy_id = ""
+    balance = 0.0
+
+    if has_token:
+        try:
+            from fyers_apiv3 import fyersModel
+            client = fyersModel.FyersModel(client_id=app_id, token=token, log_path=None)
+            prof = client.get_profile()
+            if prof.get("s") == "ok":
+                data = prof.get("data", {})
+                name = data.get("name", "")
+                fy_id = data.get("fy_id", "")
+            funds = client.funds()
+            if funds.get("s") == "ok":
+                flist = funds.get("fund_limit", [])
+                if flist:
+                    balance = flist[0].get("equityAmount", 0.0)
+        except Exception:
+            pass
+
     return JSONResponse({
         "configured": os.path.exists(token_file),
         "connected": has_token,
-        "app_id": (app_id[:4] + "***") if app_id else "",
+        "app_id": (app_id[:6] + "***") if app_id else "",
+        "name": name,
+        "fy_id": fy_id,
+        "balance": balance,
         "mode": "LIVE" if has_token else "PAPER",
         "broker": "FYERS API v3",
     })
+
+
+@app.post("/api/fyers/connect")
+async def fyers_connect(req: Request):
+    body = await req.json()
+    app_id = body.get("app_id", "").strip()
+    secret_key = body.get("secret_key", "").strip()
+    if not app_id or not secret_key:
+        return JSONResponse({"ok": False, "error": "App ID and Secret Key are required"})
+    
+    root_path = os.path.dirname(SIM_DIR)
+    cfg_file = os.path.join(root_path, "fyers_config.json")
+    with open(cfg_file, "w", encoding="utf-8") as f:
+        json.dump({"app_id": app_id, "secret_key": secret_key}, f, indent=2)
+        
+    try:
+        from fyers_apiv3 import fyersModel
+        redirect_uri = "http://127.0.0.1:8765/api/fyers/callback"
+        session = fyersModel.SessionModel(
+            client_id=app_id,
+            secret_key=secret_key,
+            redirect_uri=redirect_uri,
+            response_type="code",
+            grant_type="authorization_code"
+        )
+        auth_url = session.generate_authcode()
+        return JSONResponse({"ok": True, "auth_url": auth_url})
+    except Exception as e:
+        return JSONResponse({"ok": False, "error": f"Failed to generate auth URL: {str(e)}"})
+
+
+@app.get("/api/fyers/callback")
+def fyers_callback(auth_code: str, state: Optional[str] = None):
+    root_path = os.path.dirname(SIM_DIR)
+    cfg_file = os.path.join(root_path, "fyers_config.json")
+    if not os.path.exists(cfg_file):
+        return HTMLResponse("<h2 style='color:#ef4444;font-family:sans-serif;'>Configuration missing. Please start connection again.</h2>", status_code=400)
+    
+    try:
+        with open(cfg_file, "r", encoding="utf-8") as f:
+            cfg = json.load(f)
+        app_id = cfg.get("app_id")
+        secret_key = cfg.get("secret_key")
+        
+        from fyers_apiv3 import fyersModel
+        redirect_uri = "http://127.0.0.1:8765/api/fyers/callback"
+        session = fyersModel.SessionModel(
+            client_id=app_id,
+            secret_key=secret_key,
+            redirect_uri=redirect_uri,
+            response_type="code",
+            grant_type="authorization_code"
+        )
+        session.set_token(auth_code)
+        resp = session.generate_token()
+        
+        if resp.get("s") == "ok" or "access_token" in resp:
+            token = resp.get("access_token")
+            token_path = os.path.join(root_path, "fyers_tokens.json")
+            with open(token_path, "w", encoding="utf-8") as f:
+                json.dump({"app_id": app_id, "access_token": token}, f, indent=2)
+                
+            name = "Verified Account"
+            fy_id = ""
+            try:
+                client = fyersModel.FyersModel(client_id=app_id, token=token, log_path=None)
+                prof = client.get_profile()
+                if prof.get("s") == "ok":
+                    name = prof.get("data", {}).get("name", "Verified Account")
+                    fy_id = prof.get("data", {}).get("fy_id", "")
+            except Exception:
+                pass
+            
+            html = f"""
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+              <meta charset="utf-8">
+              <meta http-equiv="refresh" content="3;url=http://127.0.0.1:8765/">
+              <title>FYERS Connected - Quacknutzz</title>
+              <style>
+                body {{ background: #0a0d15; color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }}
+                .card {{ background: #111622; border: 1px solid #10b981; border-radius: 12px; padding: 40px; text-align: center; max-width: 460px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7); }}
+                .icon {{ width: 56px; height: 56px; background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 28px; color: #10b981; }}
+                h2 {{ margin: 0 0 8px 0; font-size: 20px; font-weight: 700; color: #ffffff; }}
+                p {{ color: #94a3b8; font-size: 13px; line-height: 1.5; margin: 0 0 20px 0; }}
+                .meta {{ background: #07090e; border: 1px solid #232d42; border-radius: 6px; padding: 12px; font-family: monospace; font-size: 12px; color: #22c55e; margin-bottom: 24px; text-align: left; }}
+                .btn {{ display: block; width: 100%; box-sizing: border-box; background: #10b981; color: #07090e; padding: 12px 20px; border-radius: 6px; font-weight: 700; font-size: 13px; text-decoration: none; text-transform: uppercase; letter-spacing: 0.5px; }}
+              </style>
+            </head>
+            <body>
+              <div class="card">
+                <div class="icon">&#10003;</div>
+                <h2>FYERS API Connected!</h2>
+                <p>Your Fyers v3 live broker session has been verified and saved to <code style="color:#f59e0b;">fyers_tokens.json</code>.</p>
+                <div class="meta">
+                  <div>Account: <b>{name}</b></div>
+                  <div>Client ID: <b>{fy_id or app_id}</b></div>
+                  <div>Mode: <b style="color:#10b981;">LIVE EXCHANGE ROUTING</b></div>
+                </div>
+                <a href="http://127.0.0.1:8765/" class="btn">Return to Trading Terminal</a>
+                <div style="font-size: 11px; color: #64748b; margin-top: 14px;">Automatically redirecting in 3 seconds...</div>
+              </div>
+            </body>
+            </html>
+            """
+            return HTMLResponse(content=html)
+        else:
+            err = resp.get("message", "Token validation failed")
+            return HTMLResponse(f"<div style='background:#0a0d15;color:#f8fafc;padding:40px;font-family:sans-serif;'><h2 style='color:#ef4444;'>Fyers Authentication Failed: {err}</h2><p style='color:#94a3b8;'>Please check your App ID and Secret Key.</p><a href='http://127.0.0.1:8765/' style='color:#f59e0b;'>Return to Cockpit</a></div>", status_code=400)
+    except Exception as e:
+        return HTMLResponse(f"<div style='background:#0a0d15;color:#f8fafc;padding:40px;font-family:sans-serif;'><h2 style='color:#ef4444;'>Exception during callback: {str(e)}</h2><a href='http://127.0.0.1:8765/' style='color:#f59e0b;'>Return to Cockpit</a></div>", status_code=500)
+
+
+@app.post("/api/fyers/disconnect")
+def fyers_disconnect():
+    root_path = os.path.dirname(SIM_DIR)
+    token_file = os.path.join(root_path, "fyers_tokens.json")
+    if os.path.exists(token_file):
+        try:
+            os.remove(token_file)
+        except Exception:
+            pass
+    return JSONResponse({"ok": True, "message": "Fyers disconnected. Reverted to paper mode."})
 
 
 @app.post("/api/action")
@@ -131,7 +292,8 @@ async def trade_action(req: Request):
 @app.get("/api/timeline_data")
 def timeline_data(start_date: Optional[str] = None, end_date: Optional[str] = None, strategy: str = "quacknutzz_strat"):
     global SIM, UNIVERSE
-    ensure_sim_loaded("live", None, strategy)
+    if SIM is None or not getattr(SIM, "syms", None):
+        ensure_sim_loaded("live", None, strategy)
     available = SIM.available_dates()
     if not available:
         return JSONResponse({"error": "No historical sessions available"})
@@ -143,48 +305,85 @@ def timeline_data(start_date: Optional[str] = None, end_date: Optional[str] = No
     if not target_dates:
         return JSONResponse({"error": f"No trading dates found between {s_date} and {e_date}", "available_dates": available})
     
+    cache = get_timeline_cache()
     all_trades = []
     daily_records = []
     cum_equity = []
     cum_net = 0.0
-    
-    # Run isolated simulation on target dates without touching live SIM state!
+    cache_dirty = False
+
     for d_str in target_dates:
-        dt = datetime.strptime(d_str, "%Y-%m-%d")
-        tmp = Simulator("replay", dt, strategy=strategy, starting_capital=C.STARTING_CAPITAL)
-        tmp.syms = SIM.syms
-        tmp.indices = SIM.indices
-        tmp.nifty_pos = SIM.nifty_pos
-        tmp.nifty_e10 = SIM.nifty_e10
-        tmp.nifty_e21 = SIM.nifty_e21
-        tmp.nifty_e30 = SIM.nifty_e30
-        
-        times = tmp.session_bar_times()
-        for t in times:
-            tmp.step(t)
-        
-        day_gross = sum(c["gross"] for c in tmp.closed)
-        day_fees = sum(c["costs"] for c in tmp.closed)
-        day_net = sum(c["net"] for c in tmp.closed)
-        day_wins = sum(1 for c in tmp.closed if c["net"] > 0)
-        
+        # Check cache first for instant sub-millisecond retrieval
+        if d_str in cache and strategy == "quacknutzz_strat":
+            rec = cache[d_str]
+            day_gross = rec["gross"]
+            day_fees = rec["fees"]
+            day_net = rec["net"]
+            day_wins = rec["wins"]
+            day_trades = rec["trades"]
+            trades = rec.get("trades_list", [])
+        else:
+            dt = datetime.strptime(d_str, "%Y-%m-%d")
+            tmp = Simulator("replay", dt, strategy=strategy, starting_capital=C.STARTING_CAPITAL)
+            tmp.syms = SIM.syms
+            tmp.indices = SIM.indices
+            tmp.nifty_pos = SIM.nifty_pos
+            tmp.nifty_e10 = SIM.nifty_e10
+            tmp.nifty_e21 = SIM.nifty_e21
+            tmp.nifty_e30 = SIM.nifty_e30
+            
+            times = tmp.session_bar_times()
+            for t in times:
+                tmp.step(t)
+            
+            day_gross = round(sum(c["gross"] for c in tmp.closed), 2)
+            day_fees = round(sum(c["costs"] for c in tmp.closed), 2)
+            day_net = round(sum(c["net"] for c in tmp.closed), 2)
+            day_wins = sum(1 for c in tmp.closed if c["net"] > 0)
+            day_trades = len(tmp.closed)
+            
+            trades = []
+            for c in tmp.closed:
+                trade_copy = dict(c)
+                trade_copy["date"] = d_str
+                trades.append(trade_copy)
+                
+            if strategy == "quacknutzz_strat":
+                cache[d_str] = {
+                    "date": d_str,
+                    "trades": day_trades,
+                    "wins": day_wins,
+                    "losses": day_trades - day_wins,
+                    "win_rate": round(day_wins / day_trades * 100, 1) if day_trades else 0.0,
+                    "gross": day_gross,
+                    "fees": day_fees,
+                    "net": day_net,
+                    "trades_list": trades
+                }
+                cache_dirty = True
+
         cum_net += day_net
         cum_equity.append({"date": d_str, "net": round(day_net, 2), "total": round(cum_net, 2)})
         
         daily_records.append({
             "date": d_str,
-            "trades": len(tmp.closed),
+            "trades": day_trades,
             "wins": day_wins,
-            "win_rate": round(day_wins / len(tmp.closed) * 100, 1) if tmp.closed else 0.0,
-            "gross": round(day_gross, 2),
-            "fees": round(day_fees, 2),
-            "net": round(day_net, 2),
+            "win_rate": round(day_wins / day_trades * 100, 1) if day_trades else 0.0,
+            "gross": day_gross,
+            "fees": day_fees,
+            "net": day_net,
         })
-        for c in tmp.closed:
-            trade_copy = dict(c)
-            trade_copy["date"] = d_str
-            all_trades.append(trade_copy)
-    
+        for t in trades:
+            all_trades.append(t)
+            
+    if cache_dirty:
+        try:
+            with open(TIMELINE_CACHE_FILE, "w", encoding="utf-8") as f:
+                json.dump(cache, f, indent=2)
+        except Exception:
+            pass
+
     tot_gross = sum(d["gross"] for d in daily_records)
     tot_fees = sum(d["fees"] for d in daily_records)
     tot_net = sum(d["net"] for d in daily_records)
@@ -383,7 +582,16 @@ def main():
     if not a.no_browser:
         threading.Timer(2.0, lambda: webbrowser.open(f"http://localhost:{C.SERVER_PORT}")).start()
     print(f"Paper-trading terminal: http://localhost:{C.SERVER_PORT}  (Ctrl+C to stop)")
-    uvicorn.run(app, host="127.0.0.1", port=C.SERVER_PORT, log_level="warning")
+    for attempt in range(15):
+        try:
+            uvicorn.run(app, host="127.0.0.1", port=C.SERVER_PORT, log_level="warning")
+            break
+        except OSError as e:
+            if getattr(e, 'winerror', None) == 10048 or "10048" in str(e):
+                print(f"[Server] Port {C.SERVER_PORT} busy (waiting for socket release, attempt {attempt+1}/15)...")
+                time.sleep(2)
+            else:
+                raise
 
 
 if __name__ == "__main__":

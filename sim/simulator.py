@@ -323,8 +323,20 @@ class Simulator:
 
     def available_dates(self) -> List[str]:
         with self.lock:
-            dates = sorted({ts.normalize() for sd in self.syms.values() for ts in sd.df.index})
-            return [str(d.date()) for d in dates[3:]] if len(dates) > 3 else [str(d.date()) for d in dates]
+            if getattr(self, "_available_dates_cache", None):
+                return self._available_dates_cache
+            idx_df = self.indices.get("NIFTY 50")
+            if idx_df is not None:
+                dates = sorted({ts.normalize() for ts in idx_df.index})
+            elif self.syms:
+                first_sd = next(iter(self.syms.values()))
+                dates = sorted({ts.normalize() for ts in first_sd.df.index})
+            else:
+                dates = []
+            res = [str(d.date()) for d in dates[3:]] if len(dates) > 3 else [str(d.date()) for d in dates]
+            if res:
+                self._available_dates_cache = res
+            return res
 
     def session_bar_times(self, target_date: Optional[pd.Timestamp] = None) -> List[pd.Timestamp]:
         d_norm = (target_date or self.session_date).normalize()

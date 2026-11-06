@@ -10,9 +10,10 @@ Supports 3 switchable strategy modes:
 """
 from datetime import time as dtime
 
-DEFAULT_STRATEGY = "v6_profit_max"
+DEFAULT_STRATEGY = "quacknutzz_strat"
 STRATEGY_LABELS = {
-    "v6_profit_max": "Latest Strategy (Active)",
+    "quacknutzz_strat": "Quacknutzz_Strat",
+    "v6_profit_max": "Quacknutzz_Strat",
     "v6_baseline": "Original Baseline",
 }
 
@@ -59,7 +60,7 @@ GST = 0.18                             # on brokerage + txn + sebi
 MARKET_SLIPPAGE = 0.0005               # 0.05% applied to market-order exits only (0% on resting limit targets)
 
 # ---------------------------------------------------------------- data / server
-INDEX_TICKERS = {"NIFTY 50": "^NSEI", "BANK NIFTY": "^NSEBANK", "INDIA VIX": "^INDIAVIX"}
+INDEX_TICKERS = {"NIFTY 50": "^NSEI", "SENSEX": "^BSESN"}
 LIVE_POLL_SECONDS = 60
 BAR_GRACE_SECONDS = 20                 # wait this long after a 5m bar ends before trusting it
 HISTORY_DAYS = 60                      # 60 trading days (~12 weeks) cached for multi-week backtest & warmup

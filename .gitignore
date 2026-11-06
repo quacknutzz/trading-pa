@@ -21,6 +21,7 @@ venv/
 ENV/
 *token*.json
 *credential*.json
+fyers_config.json
 
 # IDE & Editor folders
 .vscode/
