@@ -19,6 +19,8 @@ logs/*.log
 env/
 venv/
 ENV/
+*token*.json
+*credential*.json
 
 # IDE & Editor folders
 .vscode/
