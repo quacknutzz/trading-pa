@@ -295,25 +295,31 @@ class Simulator:
             self.session_comparison: dict = {}
 
     def load(self, data: Dict[str, pd.DataFrame], universe: List[dict], index_data: Dict[str, pd.DataFrame]):
+        ymap = {u["yahoo"]: u for u in universe}
+        new_syms = {}
+        for ys, df in data.items():
+            u = ymap.get(ys)
+            if u is None:
+                continue
+            new_syms[u["symbol"]] = SymbolData(u["symbol"], u["sector"], df)
+        new_indices = dict(index_data)
+        npos, ne10, ne21, ne30 = None, None, None, None
+        ndf = new_indices.get("NIFTY 50")
+        if ndf is not None and len(ndf) > 35:
+            nc = ndf["close"].values.astype(np.float64)
+            npos = {ts: i for i, ts in enumerate(ndf.index)}
+            ne10 = ema_fast(nc, 10)
+            ne21 = ema_fast(nc, 21)
+            ne30 = ema_fast(nc, 30)
+
         with self.lock:
-            ymap = {u["yahoo"]: u for u in universe}
-            for ys, df in data.items():
-                u = ymap.get(ys)
-                if u is None:
-                    continue
-                if u["symbol"] in self.syms:
-                    self.syms[u["symbol"]].set_df(df)
-                else:
-                    self.syms[u["symbol"]] = SymbolData(u["symbol"], u["sector"], df)
-            for name, df in index_data.items():
-                self.indices[name] = df
-            ndf = self.indices.get("NIFTY 50")
-            if ndf is not None and len(ndf) > 35:
-                nc = ndf["close"].values.astype(np.float64)
-                self.nifty_pos = {ts: i for i, ts in enumerate(ndf.index)}
-                self.nifty_e10 = ema_fast(nc, 10)
-                self.nifty_e21 = ema_fast(nc, 21)
-                self.nifty_e30 = ema_fast(nc, 30)
+            self.syms = new_syms
+            self.indices = new_indices
+            if npos is not None:
+                self.nifty_pos = npos
+                self.nifty_e10 = ne10
+                self.nifty_e21 = ne21
+                self.nifty_e30 = ne30
 
     def available_dates(self) -> List[str]:
         with self.lock:
@@ -1090,28 +1096,39 @@ class Simulator:
             if not times:
                 self.session_comparison = {}
                 return
-            comp = {}
-            for strat_key in ["v6_baseline", "v6_profit_max"]:
-                tmp = Simulator("replay", self.session_date.to_pydatetime(), strategy=strat_key, starting_capital=self.starting_capital)
-                tmp.syms = self.syms
-                tmp.indices = self.indices
-                tmp.nifty_pos = self.nifty_pos
-                tmp.nifty_e10 = self.nifty_e10
-                tmp.nifty_e21 = self.nifty_e21
-                tmp.nifty_e30 = self.nifty_e30
-                for t in times:
-                    tmp.step(t)
-                wins = sum(1 for c in tmp.closed if c["net"] > 0)
-                gross = sum(c["gross"] for c in tmp.closed)
-                comp[strat_key] = {
-                    "label": C.STRATEGY_LABELS[strat_key],
-                    "trades": len(tmp.closed),
-                    "wins": wins,
-                    "win_rate": round(wins / len(tmp.closed) * 100, 1) if tmp.closed else 0.0,
-                    "gross": round(gross, 2),
-                    "fees": round(tmp.fees, 2),
-                    "net": round(tmp.cash_realized, 2),
-                }
+            session_date = self.session_date.to_pydatetime()
+            starting_capital = self.starting_capital
+            syms_ref = self.syms
+            indices_ref = self.indices
+            npos_ref = self.nifty_pos
+            ne10_ref = self.nifty_e10
+            ne21_ref = self.nifty_e21
+            ne30_ref = self.nifty_e30
+
+        comp = {}
+        for strat_key in ["v6_baseline", "quacknutzz_strat"]:
+            tmp = Simulator("replay", session_date, strategy=strat_key, starting_capital=starting_capital)
+            tmp.syms = syms_ref
+            tmp.indices = indices_ref
+            tmp.nifty_pos = npos_ref
+            tmp.nifty_e10 = ne10_ref
+            tmp.nifty_e21 = ne21_ref
+            tmp.nifty_e30 = ne30_ref
+            for t in times:
+                tmp.step(t)
+            wins = sum(1 for c in tmp.closed if c["net"] > 0)
+            gross = sum(c["gross"] for c in tmp.closed)
+            comp[strat_key] = {
+                "label": C.STRATEGY_LABELS.get(strat_key, strat_key),
+                "trades": len(tmp.closed),
+                "wins": wins,
+                "win_rate": round(wins / len(tmp.closed) * 100, 1) if tmp.closed else 0.0,
+                "gross": round(gross, 2),
+                "fees": round(tmp.fees, 2),
+                "net": round(tmp.cash_realized, 2),
+            }
+        comp["v6_profit_max"] = comp.get("quacknutzz_strat", {})
+        with self.lock:
             self.session_comparison = comp
 
     # ------------------------------------------------ dashboard payload
