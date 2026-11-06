@@ -1,0 +1,66 @@
+time,symbol,side,ltp,rsi,adx,rvol,result,detail
+2026-11-04 09:30:00,ADANIPOWER,BUY,197.9,63.08,21.56,2.71,ORDER,limit BUY 168 @ 197.89999389648438 (5m EMA10 | Score 4.9)
+2026-11-04 09:30:00,KALYANKJIL,BUY,513.2,63.58,27.85,1.43,ORDER,limit BUY 64 @ 513.2000122070312 (5m EMA10 | Score 3.2)
+2026-11-04 09:35:00,KALYANKJIL,BUY,512.8,63.58,27.85,1.43,CANCELLED,Fix #1: Pre-fill contra flip invalidated setup (slot freed immediately)
+2026-11-04 09:35:00,HUDCO,BUY,146.99,62.68,39.87,1.59,ORDER,limit BUY 226 @ 146.99000549316406 (5m EMA10 | Score 5.3)
+2026-11-04 09:40:00,HUDCO,BUY,146.65,62.68,39.87,1.59,CANCELLED,Fix #1: Pre-fill contra flip invalidated setup (slot freed immediately)
+2026-11-04 09:40:00,SAIL,BUY,168.03,63.65,25.6,1.64,ORDER,limit BUY 198 @ 168.02999877929688 (5m EMA10 | Score 4.3)
+2026-11-04 09:45:00,ADANIPOWER,BUY,197.9,63.08,21.56,2.71,CANCELLED,limit 197.89999389648438 untouched in 3 bars
+2026-11-04 09:45:00,CUB,BUY,209.31,58.68,21.61,1.2,ORDER,limit BUY 159 @ 209.30999755859375 (5m EMA10 | Score 2.2)
+2026-11-04 09:50:00,CUB,BUY,209.43,58.68,21.61,1.2,CANCELLED,Fix #1: Pre-fill contra flip invalidated setup (slot freed immediately)
+2026-11-04 09:50:00,FEDERALBNK,SELL,330.6,35.58,21.2,1.91,ORDER,limit SELL 100 @ 330.6000061035156 (5m EMA10 | Score 4.0)
+2026-11-04 09:50:00,APLAPOLLO,BUY,2170.7,61.68,21.24,1.27,ORDER,limit BUY 15 @ 2163.8 (5m EMA200 | Score 3.0)
+2026-11-04 09:50:00,CUB,BUY,209.43,58.43,22.27,0.82,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 09:55:00,SAIL,BUY,167.93,63.65,25.6,1.64,CANCELLED,Fix #2: No bounce confirmation (closed red or below VWAP/EMA30)
+2026-11-04 09:55:00,TMCV,BUY,409.3,63.53,32.64,1.91,ORDER,limit BUY 81 @ 406.83 (5m EMA10 | Score 4.9)
+2026-11-04 09:55:00,BANKINDIA,BUY,134.32,59.97,42.02,0.85,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 09:55:00,INDUSINDBK,BUY,859.8,64.33,21.11,1.87,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 09:55:00,MOTHERSON,SELL,159.45,35.96,20.58,1.32,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 09:55:00,CANBK,BUY,118.41,57.59,29.74,1.11,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 09:55:00,PIDILITIND,BUY,1515.6,60.69,23.15,1.42,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 10:00:00,NAUKRI,SELL,1163.9,34.19,24.35,3.77,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 10:00:00,KALYANKJIL,BUY,515.0,62.39,29.68,2.44,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 10:00:00,HAVELLS,BUY,1055.0,64.25,20.27,2.65,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 10:00:00,COFORGE,BUY,2073.7,63.29,21.23,1.36,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 10:05:00,APLAPOLLO,BUY,2170.7,61.68,21.24,1.27,CANCELLED,limit 2163.8 untouched in 3 bars
+2026-11-04 10:05:00,CONCOR,BUY,431.6,64.23,37.58,1.73,ORDER,limit BUY 77 @ 429.6 (5m EMA10 | Score 5.0)
+2026-11-04 10:05:00,ADANIPOWER,BUY,200.47,64.66,35.96,1.42,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 10:05:00,HAVELLS,BUY,1055.4,64.67,20.84,2.03,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 10:05:00,UPL,BUY,518.95,61.98,21.52,0.88,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 10:05:00,COFORGE,BUY,2069.0,58.06,21.14,1.13,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 10:10:00,TMCV,BUY,409.3,63.53,32.64,1.91,CANCELLED,limit 406.83 untouched in 3 bars
+2026-11-04 10:10:00,SUNPHARMA,BUY,1792.8,63.5,34.07,1.07,ORDER,limit BUY 18 @ 1792.800048828125 (5m EMA10 | Score 3.5)
+2026-11-04 10:15:00,JSWENERGY,BUY,505.35,56.37,20.81,1.04,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 10:20:00,CONCOR,BUY,431.6,64.23,37.58,1.73,CANCELLED,limit 429.6 untouched in 3 bars
+2026-11-04 10:20:00,JSWENERGY,BUY,505.8,59.39,21.71,1.34,ORDER,limit BUY 65 @ 505.79998779296875 (5m EMA10 | Score 3.2)
+2026-11-04 10:30:00,NYKAA,SELL,350.6,38.89,20.87,1.73,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 10:45:00,AUROPHARMA,BUY,1705.0,60.69,44.38,1.6,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 10:45:00,BSOFT,SELL,320.65,34.38,22.36,1.81,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 11:05:00,TATACAP,BUY,334.3,60.96,26.03,3.66,ORDER,limit BUY 99 @ 334.29998779296875 (5m EMA10 | Score 6.9)
+2026-11-04 11:05:00,NYKAA,SELL,348.7,36.87,24.41,2.39,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 11:10:00,ADANIPOWER,BUY,200.22,64.81,37.32,1.48,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 11:15:00,SBICARD,BUY,550.4,59.53,40.47,2.66,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 11:25:00,AUROPHARMA,BUY,1705.2,63.35,43.21,2.54,ORDER,limit BUY 19 @ 1705.199951171875 (5m EMA10 | Score 6.4)
+2026-11-04 11:25:00,JUBLFOOD,SELL,422.5,44.25,23.16,2.99,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 11:30:00,AUROPHARMA,BUY,1703.2,63.35,43.21,2.54,CANCELLED,Fix #2: No bounce confirmation (closed red or below VWAP/EMA30)
+2026-11-04 11:30:00,HYUNDAI,BUY,2045.4,64.52,20.6,4.87,ORDER,limit BUY 16 @ 2045.4000244140625 (5m EMA10 | Score 8.3)
+2026-11-04 11:30:00,ATGL,BUY,560.4,60.75,21.48,2.75,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 11:55:00,MOTILALOFS,SELL,1009.2,42.42,21.28,5.24,ORDER,limit SELL 32 @ 1009.2000122070312 (5m EMA10 | Score 9.2)
+2026-11-04 11:55:00,CONCOR,SELL,426.15,45.79,20.24,2.85,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 11:55:00,PAYTM,SELL,1700.5,35.59,20.25,1.46,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 11:55:00,PNB,SELL,120.83,44.23,21.22,1.43,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 11:55:00,TMCV,SELL,404.0,38.81,20.81,1.04,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 12:05:00,OBEROIRLTY,BUY,1708.4,65.97,20.36,1.84,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 12:10:00,APOLLOTYRE,SELL,396.95,41.77,21.24,0.85,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 12:15:00,CONCOR,SELL,425.3,41.12,21.76,1.79,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 12:20:00,ICICIGI,SELL,1587.1,44.86,21.98,1.65,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 12:20:00,JIOFIN,SELL,214.61,40.21,31.13,1.0,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 12:25:00,JIOFIN,SELL,214.68,40.91,32.43,0.97,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 12:35:00,OBEROIRLTY,BUY,1707.3,58.28,21.75,4.99,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 12:50:00,AUROPHARMA,BUY,1710.7,64.39,30.25,2.78,ORDER,limit BUY 19 @ 1710.699951171875 (5m EMA10 | Score 5.7)
+2026-11-04 12:55:00,BDL,BUY,1039.25,65.22,20.29,1.58,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 13:05:00,LGEINDIA,SELL,1700.7,44.33,23.33,1.37,ORDER,limit SELL 19 @ 1702.34 (5m EMA100 | Score 2.9)
+2026-11-04 13:05:00,SBICARD,BUY,549.6,62.23,20.29,1.62,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-04 13:10:00,LGEINDIA,SELL,1701.4,44.33,23.33,1.37,CANCELLED,Fix #2: No bounce confirmation (closed green or above VWAP/EMA30)
+2026-11-04 13:10:00,ICICIGI,SELL,1586.5,47.47,25.02,1.46,ORDER,limit SELL 20 @ 1587.62 (5m EMA100 | Score 3.4)
+2026-11-04 13:15:00,ICICIGI,SELL,1588.2,47.47,25.02,1.46,CANCELLED,Fix #1: Pre-fill contra flip invalidated setup (slot freed immediately)

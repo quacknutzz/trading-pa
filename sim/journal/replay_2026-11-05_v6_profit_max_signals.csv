@@ -1,0 +1,44 @@
+time,symbol,side,ltp,rsi,adx,rvol,result,detail
+2026-11-05 09:45:00,PFC,BUY,327.8,65.99,23.31,6.64,ORDER,limit BUY 101 @ 327.79998779296875 (5m EMA10 | Score 10.7)
+2026-11-05 09:50:00,PFC,BUY,326.15,65.99,23.31,6.64,CANCELLED,Fix #2: No bounce confirmation (closed red or below VWAP/EMA30)
+2026-11-05 09:55:00,ITC,BUY,281.2,63.4,29.28,3.16,ORDER,limit BUY 118 @ 281.20001220703125 (5m EMA10 | Score 6.7)
+2026-11-05 09:55:00,MARICO,BUY,891.95,60.02,23.22,1.29,ORDER,limit BUY 37 @ 891.9500122070312 (5m EMA10 | Score 3.0)
+2026-11-05 10:00:00,ITC,BUY,280.6,63.4,29.28,3.16,CANCELLED,Fix #2: No bounce confirmation (closed red or below VWAP/EMA30)
+2026-11-05 10:00:00,EXIDEIND,BUY,370.8,55.36,30.52,7.32,ORDER,limit BUY 89 @ 370.79998779296875 (5m EMA10 | Score 12.5)
+2026-11-05 10:05:00,EXIDEIND,BUY,368.0,55.36,30.52,7.32,CANCELLED,Fix #2: No bounce confirmation (closed red or below VWAP/EMA30)
+2026-11-05 10:05:00,FEDERALBNK,BUY,335.9,55.95,25.28,1.47,ORDER,limit BUY 99 @ 335.8999938964844 (5m EMA10 | Score 3.3)
+2026-11-05 10:10:00,AUROPHARMA,BUY,1730.0,51.87,31.83,9.76,ORDER,limit BUY 19 @ 1730.0 (5m EMA10 | Score 17.2)
+2026-11-05 10:10:00,ASTRAL,SELL,1394.0,36.95,34.2,4.29,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-05 10:20:00,CONCOR,BUY,433.6,65.5,35.22,0.84,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-05 10:25:00,LICHSGFIN,BUY,528.65,65.13,21.0,4.47,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-05 10:40:00,CGPOWER,SELL,818.0,35.44,44.02,1.33,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-05 10:45:00,CGPOWER,SELL,817.6,35.07,44.3,1.48,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-05 10:50:00,BANKBARODA,BUY,249.66,64.2,48.09,1.92,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-05 10:50:00,ITC,SELL,278.7,36.78,20.28,1.51,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-05 10:55:00,BANKBARODA,BUY,249.94,65.29,48.32,1.85,ORDER,limit BUY 132 @ 249.94000244140625 (5m EMA10 | Score 6.2)
+2026-11-05 11:00:00,TATACONSUM,BUY,1072.5,59.68,20.16,1.16,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-05 11:10:00,TATAPOWER,BUY,363.35,61.74,26.8,3.24,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-05 11:10:00,SBIN,BUY,994.2,63.03,25.54,3.48,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-05 11:10:00,TATACONSUM,BUY,1074.4,65.33,22.86,3.39,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-05 11:15:00,BLUESTARCO,BUY,1586.9,65.4,21.91,9.6,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-05 11:20:00,SBIN,BUY,993.7,64.13,25.58,4.73,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-05 11:20:00,ADANIPORTS,BUY,1932.5,63.95,32.71,1.18,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-05 11:25:00,SBIN,BUY,994.45,65.13,25.65,5.16,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-05 11:25:00,PNB,BUY,124.05,63.48,48.57,0.83,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-05 11:40:00,DLF,BUY,734.25,65.29,30.8,3.71,ORDER,limit BUY 45 @ 734.25 (5m EMA10 | Score 6.9)
+2026-11-05 11:40:00,CUB,BUY,215.93,65.91,20.48,2.49,ORDER,limit BUY 154 @ 215.92999267578125 (5m EMA10 | Score 4.0)
+2026-11-05 11:40:00,GODREJCP,BUY,869.95,63.4,33.71,1.13,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-05 11:40:00,RELIANCE,BUY,1316.5,63.84,20.26,1.98,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-05 11:45:00,CUB,BUY,215.69,65.91,20.48,2.49,CANCELLED,Fix #2: No bounce confirmation (closed red or below VWAP/EMA30)
+2026-11-05 11:45:00,GODREJCP,BUY,870.45,63.95,34.46,1.62,ORDER,limit BUY 38 @ 870.4500122070312 (5m EMA10 | Score 4.3)
+2026-11-05 11:45:00,BLUESTARCO,BUY,1585.6,58.12,21.19,1.48,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-05 11:50:00,HDFCLIFE,BUY,545.05,65.04,38.81,1.36,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-05 11:50:00,TATATECH,BUY,671.0,60.44,32.68,1.49,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-05 12:25:00,ONGC,SELL,229.42,36.8,27.05,2.97,ORDER,limit SELL 145 @ 229.4199981689453 (5m EMA10 | Score 5.8)
+2026-11-05 12:30:00,ONGC,SELL,229.47,36.8,27.05,2.97,CANCELLED,Fix #2: No bounce confirmation (closed green or above VWAP/EMA30)
+2026-11-05 12:35:00,LICHSGFIN,BUY,530.9,61.66,23.1,2.6,ORDER,limit BUY 62 @ 530.9000244140625 (5m EMA10 | Score 4.7)
+2026-11-05 12:40:00,LICHSGFIN,BUY,530.6,61.66,23.1,2.6,CANCELLED,Fix #2: No bounce confirmation (closed red or below VWAP/EMA30)
+2026-11-05 12:45:00,ONGC,SELL,229.54,39.35,26.97,1.61,ORDER,limit SELL 145 @ 229.5399932861328 (5m EMA10 | Score 3.4)
+2026-11-05 12:50:00,ONGC,SELL,229.72,39.35,26.97,1.61,CANCELLED,Fix #2: No bounce confirmation (closed green or above VWAP/EMA30)
+2026-11-05 12:50:00,TATATECH,BUY,672.3,64.79,23.73,3.83,ORDER,limit BUY 49 @ 672.2999877929688 (5m EMA10 | Score 6.5)
+2026-11-05 12:50:00,BHEL,SELL,419.1,40.91,21.36,2.69,NO_SLOT,"qualified, but slots/cash currently deployed"

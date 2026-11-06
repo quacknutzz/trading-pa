@@ -1,0 +1,208 @@
+{
+  "seven_day": {
+    "v1_0925": [
+      {
+        "date": "2026-10-26",
+        "weekday": "Mon",
+        "day_type": "GREEN",
+        "nifty_ret": 1.02,
+        "trades": 4,
+        "wins": 4,
+        "losses": 0,
+        "wr": 100.0,
+        "gross": 921.83,
+        "fees": 272.42,
+        "net": 649.41
+      },
+      {
+        "date": "2026-10-27",
+        "weekday": "Tue",
+        "day_type": "FLAT",
+        "nifty_ret": 0.19,
+        "trades": 8,
+        "wins": 6,
+        "losses": 2,
+        "wr": 75.0,
+        "gross": 1844.49,
+        "fees": 460.69,
+        "net": 1383.8
+      },
+      {
+        "date": "2026-10-28",
+        "weekday": "Wed",
+        "day_type": "FLAT",
+        "nifty_ret": 0.09,
+        "trades": 7,
+        "wins": 4,
+        "losses": 3,
+        "wr": 57.1,
+        "gross": -395.92,
+        "fees": 386.26,
+        "net": -782.18
+      },
+      {
+        "date": "2026-10-29",
+        "weekday": "Thu",
+        "day_type": "GREEN",
+        "nifty_ret": 1.08,
+        "trades": 13,
+        "wins": 7,
+        "losses": 6,
+        "wr": 53.8,
+        "gross": -295.76,
+        "fees": 775.62,
+        "net": -1071.38
+      },
+      {
+        "date": "2026-10-30",
+        "weekday": "Fri",
+        "day_type": "GREEN",
+        "nifty_ret": 0.39,
+        "trades": 9,
+        "wins": 9,
+        "losses": 0,
+        "wr": 100.0,
+        "gross": 1184.74,
+        "fees": 453.09,
+        "net": 731.65
+      },
+      {
+        "date": "2026-11-02",
+        "weekday": "Mon",
+        "day_type": "GREEN",
+        "nifty_ret": 0.94,
+        "trades": 11,
+        "wins": 9,
+        "losses": 2,
+        "wr": 81.8,
+        "gross": 1949.63,
+        "fees": 623.22,
+        "net": 1326.41
+      },
+      {
+        "date": "2026-11-03",
+        "weekday": "Tue",
+        "day_type": "GREEN",
+        "nifty_ret": 0.97,
+        "trades": 7,
+        "wins": 3,
+        "losses": 4,
+        "wr": 42.9,
+        "gross": -456.38,
+        "fees": 359.72,
+        "net": -816.1
+      }
+    ],
+    "v2_0945": [
+      {
+        "date": "2026-10-26",
+        "weekday": "Mon",
+        "day_type": "GREEN",
+        "nifty_ret": 1.02,
+        "trades": 3,
+        "wins": 3,
+        "losses": 0,
+        "wr": 100.0,
+        "gross": 771.43,
+        "fees": 220.94,
+        "net": 550.49
+      },
+      {
+        "date": "2026-10-27",
+        "weekday": "Tue",
+        "day_type": "FLAT",
+        "nifty_ret": 0.19,
+        "trades": 6,
+        "wins": 5,
+        "losses": 1,
+        "wr": 83.3,
+        "gross": 1118.2,
+        "fees": 411.28,
+        "net": 706.92
+      },
+      {
+        "date": "2026-10-28",
+        "weekday": "Wed",
+        "day_type": "FLAT",
+        "nifty_ret": 0.09,
+        "trades": 7,
+        "wins": 4,
+        "losses": 3,
+        "wr": 57.1,
+        "gross": -395.92,
+        "fees": 386.26,
+        "net": -782.18
+      },
+      {
+        "date": "2026-10-29",
+        "weekday": "Thu",
+        "day_type": "GREEN",
+        "nifty_ret": 1.08,
+        "trades": 11,
+        "wins": 5,
+        "losses": 6,
+        "wr": 45.5,
+        "gross": -125.45,
+        "fees": 661.65,
+        "net": -787.1
+      },
+      {
+        "date": "2026-10-30",
+        "weekday": "Fri",
+        "day_type": "GREEN",
+        "nifty_ret": 0.39,
+        "trades": 10,
+        "wins": 10,
+        "losses": 0,
+        "wr": 100.0,
+        "gross": 1460.23,
+        "fees": 488.54,
+        "net": 971.69
+      },
+      {
+        "date": "2026-11-02",
+        "weekday": "Mon",
+        "day_type": "GREEN",
+        "nifty_ret": 0.94,
+        "trades": 8,
+        "wins": 7,
+        "losses": 1,
+        "wr": 87.5,
+        "gross": 1734.17,
+        "fees": 467.76,
+        "net": 1266.41
+      },
+      {
+        "date": "2026-11-03",
+        "weekday": "Tue",
+        "day_type": "GREEN",
+        "nifty_ret": 0.97,
+        "trades": 6,
+        "wins": 6,
+        "losses": 0,
+        "wr": 100.0,
+        "gross": 903.5,
+        "fees": 340.61,
+        "net": 562.89
+      }
+    ]
+  },
+  "full_62d_totals": {
+    "v1_0925": {
+      "trades": 404,
+      "wins": 278,
+      "losses": 126,
+      "gross": 31340.11,
+      "fees": 25719.26,
+      "net": 5620.85
+    },
+    "v2_0945": {
+      "trades": 359,
+      "wins": 249,
+      "losses": 110,
+      "gross": 26082.81,
+      "fees": 23458.34,
+      "net": 2624.47
+    }
+  }
+}

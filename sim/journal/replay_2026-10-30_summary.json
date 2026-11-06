@@ -1,0 +1,70 @@
+{
+ "kpi": {
+  "capital": 500000.0,
+  "gross": 627.44,
+  "realized": 154.29,
+  "unrealized": 0.0,
+  "fees": 473.15,
+  "trades": 1,
+  "wins": 1,
+  "win_rate": 100.0,
+  "profit_factor": 99.0,
+  "signals": 253,
+  "universe": 139
+ },
+ "strategy": "v6_profit_max",
+ "config": {
+  "sl_pct": 0.01,
+  "tgt_pct": 0.012,
+  "max_pos": 3,
+  "buy_rsi": [
+   40.0,
+   60.0
+  ],
+  "sell_rsi": [
+   38.0,
+   60.0
+  ],
+  "adx_min": 20.0,
+  "adx_exit": 18.0,
+  "capital": 500000.0,
+  "leverage": 1.0,
+  "window": [
+   "09:25:00",
+   "14:45:00",
+   "15:05:00"
+  ]
+ },
+ "closed": [
+  {
+   "id": 4,
+   "symbol": "BIOCON",
+   "sector": "CNXPHARMA",
+   "side": "SELL",
+   "qty": 1426,
+   "entry": 350.7,
+   "exit": 350.26,
+   "entry_time": "2026-10-30 10:20:00",
+   "exit_time": "2026-10-30 10:30:00",
+   "reason": "PROFIT_LOCK (STAGE1_TAX_SHIELD)",
+   "gross": 627.44,
+   "costs": 473.15,
+   "cost_detail": {
+    "brokerage": 40.0,
+    "stt": 125.02,
+    "exchange": 30.69,
+    "stamp": 14.98,
+    "gst": 12.72,
+    "slippage": 249.74,
+    "total": 473.15
+   },
+   "net": 154.29,
+   "ret_pct": 0.125,
+   "bars_held": 2,
+   "mfe": 0.34,
+   "mae": -0.03,
+   "sl_state": "STAGE1_TAX_SHIELD",
+   "plain_english": "SHORT SELL 1426 sh @ \u20b9350.70 \u2192 Covered @ \u20b9350.26 (+0.12%) | Gross +\u20b9627.44 \u2212 Tax/Brk \u20b9473.15 = Net +\u20b9154.29"
+  }
+ ]
+}

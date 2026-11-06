@@ -1,0 +1,38 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Large binary caches & datasets (re-fetched/generated on demand)
+*.pkl
+*.parquet
+sim/cache/*.pkl
+scratch/*.parquet
+
+# Log files
+logs/*.log
+*.log
+
+# Environments & virtualenvs
+.env
+.venv
+env/
+venv/
+ENV/
+
+# IDE & Editor folders
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# Temporary files & crash dumps
+*.tmp
+*.bak

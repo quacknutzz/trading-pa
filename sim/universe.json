@@ -1,0 +1,697 @@
+[
+ {
+  "symbol": "360ONE",
+  "yahoo": "360ONE.NS",
+  "sector": "CNXFIN"
+ },
+ {
+  "symbol": "ABCAPITAL",
+  "yahoo": "ABCAPITAL.NS",
+  "sector": "CNXFIN"
+ },
+ {
+  "symbol": "ADANIENSOL",
+  "yahoo": "ADANIENSOL.NS",
+  "sector": "CNXENERGY"
+ },
+ {
+  "symbol": "ADANIGREEN",
+  "yahoo": "ADANIGREEN.NS",
+  "sector": "CNXENERGY"
+ },
+ {
+  "symbol": "ADANIPORTS",
+  "yahoo": "ADANIPORTS.NS",
+  "sector": "CNXINFRA"
+ },
+ {
+  "symbol": "ADANIPOWER",
+  "yahoo": "ADANIPOWER.NS",
+  "sector": "CNXENERGY"
+ },
+ {
+  "symbol": "AMBUJACEM",
+  "yahoo": "AMBUJACEM.NS",
+  "sector": "CNXINFRA"
+ },
+ {
+  "symbol": "APLAPOLLO",
+  "yahoo": "APLAPOLLO.NS",
+  "sector": "CNXMETAL"
+ },
+ {
+  "symbol": "APOLLOTYRE",
+  "yahoo": "APOLLOTYRE.NS",
+  "sector": "CNXAUTO"
+ },
+ {
+  "symbol": "ASHOKLEY",
+  "yahoo": "ASHOKLEY.NS",
+  "sector": "CNXAUTO"
+ },
+ {
+  "symbol": "ASTRAL",
+  "yahoo": "ASTRAL.NS",
+  "sector": "CNXINDUSTRIAL"
+ },
+ {
+  "symbol": "ATGL",
+  "yahoo": "ATGL.NS",
+  "sector": "CNXENERGY"
+ },
+ {
+  "symbol": "AUBANK",
+  "yahoo": "AUBANK.NS",
+  "sector": "NSEBANK"
+ },
+ {
+  "symbol": "AUROPHARMA",
+  "yahoo": "AUROPHARMA.NS",
+  "sector": "CNXPHARMA"
+ },
+ {
+  "symbol": "AXISBANK",
+  "yahoo": "AXISBANK.NS",
+  "sector": "NSEBANK"
+ },
+ {
+  "symbol": "BAJAJFINSV",
+  "yahoo": "BAJAJFINSV.NS",
+  "sector": "CNXCONSUM"
+ },
+ {
+  "symbol": "BAJFINANCE",
+  "yahoo": "BAJFINANCE.NS",
+  "sector": "CNXCONSUM"
+ },
+ {
+  "symbol": "BANKBARODA",
+  "yahoo": "BANKBARODA.NS",
+  "sector": "NSEBANK"
+ },
+ {
+  "symbol": "BANKINDIA",
+  "yahoo": "BANKINDIA.NS",
+  "sector": "CNXPSUBANK"
+ },
+ {
+  "symbol": "BDL",
+  "yahoo": "BDL.NS",
+  "sector": "CNXINDUSTRIAL"
+ },
+ {
+  "symbol": "BEL",
+  "yahoo": "BEL.NS",
+  "sector": "CNXINDUSTRIAL"
+ },
+ {
+  "symbol": "BHARATFORG",
+  "yahoo": "BHARATFORG.NS",
+  "sector": "CNXAUTO"
+ },
+ {
+  "symbol": "BHARTIARTL",
+  "yahoo": "BHARTIARTL.NS",
+  "sector": "CNXINFRA"
+ },
+ {
+  "symbol": "BHEL",
+  "yahoo": "BHEL.NS",
+  "sector": "CNXINDUSTRIAL"
+ },
+ {
+  "symbol": "BIOCON",
+  "yahoo": "BIOCON.NS",
+  "sector": "CNXPHARMA"
+ },
+ {
+  "symbol": "BLUESTARCO",
+  "yahoo": "BLUESTARCO.NS",
+  "sector": "CNXINDUSTRIAL"
+ },
+ {
+  "symbol": "BPCL",
+  "yahoo": "BPCL.NS",
+  "sector": "CNXINDUSTRIAL"
+ },
+ {
+  "symbol": "BSOFT",
+  "yahoo": "BSOFT.NS",
+  "sector": "CNXIT"
+ },
+ {
+  "symbol": "CANBK",
+  "yahoo": "CANBK.NS",
+  "sector": "NSEBANK"
+ },
+ {
+  "symbol": "CGPOWER",
+  "yahoo": "CGPOWER.NS",
+  "sector": "CNXINDUSTRIAL"
+ },
+ {
+  "symbol": "CHOLAFIN",
+  "yahoo": "CHOLAFIN.NS",
+  "sector": "CNXFIN"
+ },
+ {
+  "symbol": "CIPLA",
+  "yahoo": "CIPLA.NS",
+  "sector": "CNXPHARMA"
+ },
+ {
+  "symbol": "COALINDIA",
+  "yahoo": "COALINDIA.NS",
+  "sector": "CNXENERGY"
+ },
+ {
+  "symbol": "COCHINSHIP",
+  "yahoo": "COCHINSHIP.NS",
+  "sector": "CNXINDUSTRIAL"
+ },
+ {
+  "symbol": "COFORGE",
+  "yahoo": "COFORGE.NS",
+  "sector": "CNXIT"
+ },
+ {
+  "symbol": "CONCOR",
+  "yahoo": "CONCOR.NS",
+  "sector": "CNXPSE"
+ },
+ {
+  "symbol": "COROMANDEL",
+  "yahoo": "COROMANDEL.NS",
+  "sector": "CNXINDUSTRIAL"
+ },
+ {
+  "symbol": "CUB",
+  "yahoo": "CUB.NS",
+  "sector": "NSEBANK"
+ },
+ {
+  "symbol": "DABUR",
+  "yahoo": "DABUR.NS",
+  "sector": "CNXFMCG"
+ },
+ {
+  "symbol": "DLF",
+  "yahoo": "DLF.NS",
+  "sector": "CNXREALTY"
+ },
+ {
+  "symbol": "DRREDDY",
+  "yahoo": "DRREDDY.NS",
+  "sector": "CNXPHARMA"
+ },
+ {
+  "symbol": "ETERNAL",
+  "yahoo": "ETERNAL.NS",
+  "sector": "CNXCONSUM"
+ },
+ {
+  "symbol": "EXIDEIND",
+  "yahoo": "EXIDEIND.NS",
+  "sector": "CNXAUTO"
+ },
+ {
+  "symbol": "FEDERALBNK",
+  "yahoo": "FEDERALBNK.NS",
+  "sector": "NSEBANK"
+ },
+ {
+  "symbol": "FORTIS",
+  "yahoo": "FORTIS.NS",
+  "sector": "CNXINFRA"
+ },
+ {
+  "symbol": "GAIL",
+  "yahoo": "GAIL.NS",
+  "sector": "CNXENERGY"
+ },
+ {
+  "symbol": "GMRAIRPORT",
+  "yahoo": "GMRAIRPORT.NS",
+  "sector": "CNXINFRA"
+ },
+ {
+  "symbol": "GODREJCP",
+  "yahoo": "GODREJCP.NS",
+  "sector": "CNXFMCG"
+ },
+ {
+  "symbol": "GODREJPROP",
+  "yahoo": "GODREJPROP.NS",
+  "sector": "CNXREALTY"
+ },
+ {
+  "symbol": "GROWW",
+  "yahoo": "GROWW.NS",
+  "sector": "CNXFIN"
+ },
+ {
+  "symbol": "HAVELLS",
+  "yahoo": "HAVELLS.NS",
+  "sector": "CNXINDUSTRIAL"
+ },
+ {
+  "symbol": "HCLTECH",
+  "yahoo": "HCLTECH.NS",
+  "sector": "CNXIT"
+ },
+ {
+  "symbol": "HDFCBANK",
+  "yahoo": "HDFCBANK.NS",
+  "sector": "NSEBANK"
+ },
+ {
+  "symbol": "HDFCLIFE",
+  "yahoo": "HDFCLIFE.NS",
+  "sector": "CNXCONSUM"
+ },
+ {
+  "symbol": "HINDALCO",
+  "yahoo": "HINDALCO.NS",
+  "sector": "CNXMETAL"
+ },
+ {
+  "symbol": "HINDPETRO",
+  "yahoo": "HINDPETRO.NS",
+  "sector": "CNXENERGY"
+ },
+ {
+  "symbol": "HINDZINC",
+  "yahoo": "HINDZINC.NS",
+  "sector": "CNXMETAL"
+ },
+ {
+  "symbol": "HUDCO",
+  "yahoo": "HUDCO.NS",
+  "sector": "CNXFIN"
+ },
+ {
+  "symbol": "HYUNDAI",
+  "yahoo": "HYUNDAI.NS",
+  "sector": "CNXINDUSTRIAL"
+ },
+ {
+  "symbol": "ICICIBANK",
+  "yahoo": "ICICIBANK.NS",
+  "sector": "NSEBANK"
+ },
+ {
+  "symbol": "ICICIGI",
+  "yahoo": "ICICIGI.NS",
+  "sector": "CNXFIN"
+ },
+ {
+  "symbol": "INDHOTEL",
+  "yahoo": "INDHOTEL.NS",
+  "sector": "CNXINFRA"
+ },
+ {
+  "symbol": "INDIANB",
+  "yahoo": "INDIANB.NS",
+  "sector": "CNXPSUBANK"
+ },
+ {
+  "symbol": "INDUSINDBK",
+  "yahoo": "INDUSINDBK.NS",
+  "sector": "NSEBANK"
+ },
+ {
+  "symbol": "INDUSTOWER",
+  "yahoo": "INDUSTOWER.NS",
+  "sector": "CNXINFRA"
+ },
+ {
+  "symbol": "INFY",
+  "yahoo": "INFY.NS",
+  "sector": "CNXIT"
+ },
+ {
+  "symbol": "IOC",
+  "yahoo": "IOC.NS",
+  "sector": "CNXINDUSTRIAL"
+ },
+ {
+  "symbol": "IRCTC",
+  "yahoo": "IRCTC.NS",
+  "sector": "CNXPSE"
+ },
+ {
+  "symbol": "IREDA",
+  "yahoo": "IREDA.NS",
+  "sector": "CNXFIN"
+ },
+ {
+  "symbol": "IRFC",
+  "yahoo": "IRFC.NS",
+  "sector": "CNXPSE"
+ },
+ {
+  "symbol": "ITC",
+  "yahoo": "ITC.NS",
+  "sector": "CNXFMCG"
+ },
+ {
+  "symbol": "JINDALSTEL",
+  "yahoo": "JINDALSTEL.NS",
+  "sector": "CNXMETAL"
+ },
+ {
+  "symbol": "JIOFIN",
+  "yahoo": "JIOFIN.NS",
+  "sector": "CNXCONSUM"
+ },
+ {
+  "symbol": "JSWENERGY",
+  "yahoo": "JSWENERGY.NS",
+  "sector": "CNXENERGY"
+ },
+ {
+  "symbol": "JSWSTEEL",
+  "yahoo": "JSWSTEEL.NS",
+  "sector": "CNXMETAL"
+ },
+ {
+  "symbol": "JUBLFOOD",
+  "yahoo": "JUBLFOOD.NS",
+  "sector": "CNXCONSUM"
+ },
+ {
+  "symbol": "KALYANKJIL",
+  "yahoo": "KALYANKJIL.NS",
+  "sector": "CNXCONSUM"
+ },
+ {
+  "symbol": "KOTAKBANK",
+  "yahoo": "KOTAKBANK.NS",
+  "sector": "NSEBANK"
+ },
+ {
+  "symbol": "KPITTECH",
+  "yahoo": "KPITTECH.NS",
+  "sector": "CNXIT"
+ },
+ {
+  "symbol": "LAURUSLABS",
+  "yahoo": "LAURUSLABS.NS",
+  "sector": "CNXPHARMA"
+ },
+ {
+  "symbol": "LENSKART",
+  "yahoo": "LENSKART.NS",
+  "sector": "CNXCONSUM"
+ },
+ {
+  "symbol": "LGEINDIA",
+  "yahoo": "LGEINDIA.NS",
+  "sector": "CNXCONSUM"
+ },
+ {
+  "symbol": "LICHSGFIN",
+  "yahoo": "LICHSGFIN.NS",
+  "sector": "CNXFIN"
+ },
+ {
+  "symbol": "LODHA",
+  "yahoo": "LODHA.NS",
+  "sector": "CNXREALTY"
+ },
+ {
+  "symbol": "LTF",
+  "yahoo": "LTF.NS",
+  "sector": "CNXFIN"
+ },
+ {
+  "symbol": "M&MFIN",
+  "yahoo": "M&MFIN.NS",
+  "sector": "CNXFIN"
+ },
+ {
+  "symbol": "MARICO",
+  "yahoo": "MARICO.NS",
+  "sector": "CNXFMCG"
+ },
+ {
+  "symbol": "MAXHEALTH",
+  "yahoo": "MAXHEALTH.NS",
+  "sector": "CNXHEALTHCARE"
+ },
+ {
+  "symbol": "MFSL",
+  "yahoo": "MFSL.NS",
+  "sector": "CNXFIN"
+ },
+ {
+  "symbol": "MOTHERSON",
+  "yahoo": "MOTHERSON.NS",
+  "sector": "CNXAUTO"
+ },
+ {
+  "symbol": "MOTILALOFS",
+  "yahoo": "MOTILALOFS.NS",
+  "sector": "CNXFIN"
+ },
+ {
+  "symbol": "NATIONALUM",
+  "yahoo": "NATIONALUM.NS",
+  "sector": "CNXMETAL"
+ },
+ {
+  "symbol": "NAUKRI",
+  "yahoo": "NAUKRI.NS",
+  "sector": "CNXCONSUM"
+ },
+ {
+  "symbol": "NESTLEIND",
+  "yahoo": "NESTLEIND.NS",
+  "sector": "CNXFMCG"
+ },
+ {
+  "symbol": "NTPC",
+  "yahoo": "NTPC.NS",
+  "sector": "CNXENERGY"
+ },
+ {
+  "symbol": "NYKAA",
+  "yahoo": "NYKAA.NS",
+  "sector": "CNXCONSUM"
+ },
+ {
+  "symbol": "OBEROIRLTY",
+  "yahoo": "OBEROIRLTY.NS",
+  "sector": "CNXREALTY"
+ },
+ {
+  "symbol": "OIL",
+  "yahoo": "OIL.NS",
+  "sector": "CNXENERGY"
+ },
+ {
+  "symbol": "ONGC",
+  "yahoo": "ONGC.NS",
+  "sector": "CNXENERGY"
+ },
+ {
+  "symbol": "PATANJALI",
+  "yahoo": "PATANJALI.NS",
+  "sector": "CNXFMCG"
+ },
+ {
+  "symbol": "PAYTM",
+  "yahoo": "PAYTM.NS",
+  "sector": "CNXFIN"
+ },
+ {
+  "symbol": "PFC",
+  "yahoo": "PFC.NS",
+  "sector": "CNXFIN"
+ },
+ {
+  "symbol": "PHOENIXLTD",
+  "yahoo": "PHOENIXLTD.NS",
+  "sector": "CNXREALTY"
+ },
+ {
+  "symbol": "PIDILITIND",
+  "yahoo": "PIDILITIND.NS",
+  "sector": "CNXINDUSTRIAL"
+ },
+ {
+  "symbol": "PNB",
+  "yahoo": "PNB.NS",
+  "sector": "NSEBANK"
+ },
+ {
+  "symbol": "POLICYBZR",
+  "yahoo": "POLICYBZR.NS",
+  "sector": "CNXFIN"
+ },
+ {
+  "symbol": "POWERGRID",
+  "yahoo": "POWERGRID.NS",
+  "sector": "CNXENERGY"
+ },
+ {
+  "symbol": "PREMIERENE",
+  "yahoo": "PREMIERENE.NS",
+  "sector": "CNXINDUSTRIAL"
+ },
+ {
+  "symbol": "PRESTIGE",
+  "yahoo": "PRESTIGE.NS",
+  "sector": "CNXREALTY"
+ },
+ {
+  "symbol": "RECLTD",
+  "yahoo": "RECLTD.NS",
+  "sector": "CNXFIN"
+ },
+ {
+  "symbol": "RELIANCE",
+  "yahoo": "RELIANCE.NS",
+  "sector": "CNXENERGY"
+ },
+ {
+  "symbol": "RVNL",
+  "yahoo": "RVNL.NS",
+  "sector": "CNXPSE"
+ },
+ {
+  "symbol": "SAIL",
+  "yahoo": "SAIL.NS",
+  "sector": "CNXMETAL"
+ },
+ {
+  "symbol": "SBICARD",
+  "yahoo": "SBICARD.NS",
+  "sector": "CNXFIN"
+ },
+ {
+  "symbol": "SBILIFE",
+  "yahoo": "SBILIFE.NS",
+  "sector": "CNXFIN"
+ },
+ {
+  "symbol": "SBIN",
+  "yahoo": "SBIN.NS",
+  "sector": "NSEBANK"
+ },
+ {
+  "symbol": "SHRIRAMFIN",
+  "yahoo": "SHRIRAMFIN.NS",
+  "sector": "CNXCONSUM"
+ },
+ {
+  "symbol": "SONATSOFTW",
+  "yahoo": "SONATSOFTW.NS",
+  "sector": "CNXIT"
+ },
+ {
+  "symbol": "SUNPHARMA",
+  "yahoo": "SUNPHARMA.NS",
+  "sector": "CNXPHARMA"
+ },
+ {
+  "symbol": "SWIGGY",
+  "yahoo": "SWIGGY.NS",
+  "sector": "CNXCONSUM"
+ },
+ {
+  "symbol": "TATACAP",
+  "yahoo": "TATACAP.NS",
+  "sector": "CNXFIN"
+ },
+ {
+  "symbol": "TATACOMM",
+  "yahoo": "TATACOMM.NS",
+  "sector": "CNXTELECOM"
+ },
+ {
+  "symbol": "TATACONSUM",
+  "yahoo": "TATACONSUM.NS",
+  "sector": "CNXFMCG"
+ },
+ {
+  "symbol": "TATAINVEST",
+  "yahoo": "TATAINVEST.NS",
+  "sector": "CNXFIN"
+ },
+ {
+  "symbol": "TATAPOWER",
+  "yahoo": "TATAPOWER.NS",
+  "sector": "CNXENERGY"
+ },
+ {
+  "symbol": "TATASTEEL",
+  "yahoo": "TATASTEEL.NS",
+  "sector": "CNXMETAL"
+ },
+ {
+  "symbol": "TATATECH",
+  "yahoo": "TATATECH.NS",
+  "sector": "CNXIT"
+ },
+ {
+  "symbol": "TECHM",
+  "yahoo": "TECHM.NS",
+  "sector": "CNXIT"
+ },
+ {
+  "symbol": "TMCV",
+  "yahoo": "TMCV.NS",
+  "sector": "CNXINDUSTRIAL"
+ },
+ {
+  "symbol": "TMPV",
+  "yahoo": "TMPV.NS",
+  "sector": "CNXAUTO"
+ },
+ {
+  "symbol": "UNIONBANK",
+  "yahoo": "UNIONBANK.NS",
+  "sector": "NSEBANK"
+ },
+ {
+  "symbol": "UNITDSPR",
+  "yahoo": "UNITDSPR.NS",
+  "sector": "CNXFMCG"
+ },
+ {
+  "symbol": "UPL",
+  "yahoo": "UPL.NS",
+  "sector": "CNXINDUSTRIAL"
+ },
+ {
+  "symbol": "VBL",
+  "yahoo": "VBL.NS",
+  "sector": "CNXFMCG"
+ },
+ {
+  "symbol": "VEDL",
+  "yahoo": "VEDL.NS",
+  "sector": "CNXMETAL"
+ },
+ {
+  "symbol": "VMM",
+  "yahoo": "VMM.NS",
+  "sector": "CNXCONSUM"
+ },
+ {
+  "symbol": "VOLTAS",
+  "yahoo": "VOLTAS.NS",
+  "sector": "CNXINDUSTRIAL"
+ },
+ {
+  "symbol": "WIPRO",
+  "yahoo": "WIPRO.NS",
+  "sector": "CNXIT"
+ },
+ {
+  "symbol": "ZYDUSLIFE",
+  "yahoo": "ZYDUSLIFE.NS",
+  "sector": "CNXPHARMA"
+ }
+]

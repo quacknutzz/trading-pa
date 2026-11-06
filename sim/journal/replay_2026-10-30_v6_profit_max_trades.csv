@@ -1,0 +1,2 @@
+id,symbol,sector,side,qty,entry,exit,entry_time,exit_time,reason,gross,costs,net,ret_pct,bars_held,mfe,mae,sl_state,plain_english
+4,BIOCON,CNXPHARMA,SELL,1426,350.7,350.26,2026-10-30 10:20:00,2026-10-30 10:30:00,PROFIT_LOCK (STAGE1_TAX_SHIELD),627.44,473.15,154.29,0.125,2,0.34,-0.03,STAGE1_TAX_SHIELD,SHORT SELL 1426 sh @ ₹350.70 → Covered @ ₹350.26 (+0.12%) | Gross +₹627.44 − Tax/Brk ₹473.15 = Net +₹154.29

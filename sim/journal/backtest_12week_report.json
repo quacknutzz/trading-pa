@@ -1,0 +1,362 @@
+{
+  "generated_at": "2026-11-06 03:16:37",
+  "period": "2026-08-05 to 2026-11-05 (64 Trading Days / 14 Weeks)",
+  "capital": 500000,
+  "leverage": 2.0,
+  "totals": {
+    "v6_baseline": {
+      "trades": 713,
+      "wins": 185,
+      "win_rate": 25.9,
+      "gross": -63615.49,
+      "fees": 227014.45,
+      "net": -290629.94
+    },
+    "v6_profit_max": {
+      "trades": 438,
+      "wins": 317,
+      "win_rate": 72.4,
+      "gross": 315451.53,
+      "fees": 133982.25,
+      "net": 181469.28
+    }
+  },
+  "weeks": [
+    {
+      "week": "W01 (Aug 05 - Aug 07)",
+      "days": 3,
+      "baseline": {
+        "week": "W01 (Aug 05 - Aug 07)",
+        "days": 3,
+        "trades": 16,
+        "wins": 8,
+        "wr": 50.0,
+        "gross": 10471.02,
+        "fees": 5123.46,
+        "net": 5347.56
+      },
+      "profit_max": {
+        "week": "W01 (Aug 05 - Aug 07)",
+        "days": 3,
+        "trades": 11,
+        "wins": 5,
+        "wr": 45.5,
+        "gross": 3946.44,
+        "fees": 3477.43,
+        "net": 469.01
+      }
+    },
+    {
+      "week": "W02 (Aug 10 - Aug 14)",
+      "days": 5,
+      "baseline": {
+        "week": "W02 (Aug 10 - Aug 14)",
+        "days": 5,
+        "trades": 56,
+        "wins": 19,
+        "wr": 33.9,
+        "gross": 23629.36,
+        "fees": 17384.64,
+        "net": 6244.72
+      },
+      "profit_max": {
+        "week": "W02 (Aug 10 - Aug 14)",
+        "days": 5,
+        "trades": 37,
+        "wins": 24,
+        "wr": 64.9,
+        "gross": 30155.67,
+        "fees": 10799.63,
+        "net": 19356.04
+      }
+    },
+    {
+      "week": "W03 (Aug 17 - Aug 21)",
+      "days": 5,
+      "baseline": {
+        "week": "W03 (Aug 17 - Aug 21)",
+        "days": 5,
+        "trades": 53,
+        "wins": 15,
+        "wr": 28.3,
+        "gross": 3163.56,
+        "fees": 16784.81,
+        "net": -13621.25
+      },
+      "profit_max": {
+        "week": "W03 (Aug 17 - Aug 21)",
+        "days": 5,
+        "trades": 32,
+        "wins": 20,
+        "wr": 62.5,
+        "gross": 19087.47,
+        "fees": 9635.04,
+        "net": 9452.43
+      }
+    },
+    {
+      "week": "W04 (Aug 24 - Aug 28)",
+      "days": 5,
+      "baseline": {
+        "week": "W04 (Aug 24 - Aug 28)",
+        "days": 5,
+        "trades": 64,
+        "wins": 14,
+        "wr": 21.9,
+        "gross": -14066.21,
+        "fees": 20593.48,
+        "net": -34659.69
+      },
+      "profit_max": {
+        "week": "W04 (Aug 24 - Aug 28)",
+        "days": 5,
+        "trades": 32,
+        "wins": 19,
+        "wr": 59.4,
+        "gross": 12167.12,
+        "fees": 9758.35,
+        "net": 2408.77
+      }
+    },
+    {
+      "week": "W05 (Aug 31 - Sep 04)",
+      "days": 5,
+      "baseline": {
+        "week": "W05 (Aug 31 - Sep 04)",
+        "days": 5,
+        "trades": 60,
+        "wins": 14,
+        "wr": 23.3,
+        "gross": -4479.25,
+        "fees": 19237.74,
+        "net": -23716.99
+      },
+      "profit_max": {
+        "week": "W05 (Aug 31 - Sep 04)",
+        "days": 5,
+        "trades": 29,
+        "wins": 18,
+        "wr": 62.1,
+        "gross": 8491.02,
+        "fees": 8773.11,
+        "net": -282.09
+      }
+    },
+    {
+      "week": "W06 (Sep 07 - Sep 11)",
+      "days": 5,
+      "baseline": {
+        "week": "W06 (Sep 07 - Sep 11)",
+        "days": 5,
+        "trades": 59,
+        "wins": 14,
+        "wr": 23.7,
+        "gross": -21257.03,
+        "fees": 19186.82,
+        "net": -40443.85
+      },
+      "profit_max": {
+        "week": "W06 (Sep 07 - Sep 11)",
+        "days": 5,
+        "trades": 34,
+        "wins": 24,
+        "wr": 70.6,
+        "gross": 29728.06,
+        "fees": 10308.09,
+        "net": 19419.97
+      }
+    },
+    {
+      "week": "W07 (Sep 15 - Sep 18)",
+      "days": 4,
+      "baseline": {
+        "week": "W07 (Sep 15 - Sep 18)",
+        "days": 4,
+        "trades": 41,
+        "wins": 12,
+        "wr": 29.3,
+        "gross": 15339.57,
+        "fees": 12911.51,
+        "net": 2428.06
+      },
+      "profit_max": {
+        "week": "W07 (Sep 15 - Sep 18)",
+        "days": 4,
+        "trades": 26,
+        "wins": 24,
+        "wr": 92.3,
+        "gross": 30331.45,
+        "fees": 7807.7,
+        "net": 22523.75
+      }
+    },
+    {
+      "week": "W08 (Sep 21 - Sep 25)",
+      "days": 5,
+      "baseline": {
+        "week": "W08 (Sep 21 - Sep 25)",
+        "days": 5,
+        "trades": 55,
+        "wins": 15,
+        "wr": 27.3,
+        "gross": 10.8,
+        "fees": 17786.51,
+        "net": -17775.71
+      },
+      "profit_max": {
+        "week": "W08 (Sep 21 - Sep 25)",
+        "days": 5,
+        "trades": 31,
+        "wins": 25,
+        "wr": 80.6,
+        "gross": 23042.98,
+        "fees": 9593.64,
+        "net": 13449.34
+      }
+    },
+    {
+      "week": "W09 (Sep 28 - Oct 01)",
+      "days": 4,
+      "baseline": {
+        "week": "W09 (Sep 28 - Oct 01)",
+        "days": 4,
+        "trades": 37,
+        "wins": 7,
+        "wr": 18.9,
+        "gross": -25296.5,
+        "fees": 11976.09,
+        "net": -37272.59
+      },
+      "profit_max": {
+        "week": "W09 (Sep 28 - Oct 01)",
+        "days": 4,
+        "trades": 33,
+        "wins": 29,
+        "wr": 87.9,
+        "gross": 43049.98,
+        "fees": 9943.48,
+        "net": 33106.5
+      }
+    },
+    {
+      "week": "W10 (Oct 05 - Oct 09)",
+      "days": 5,
+      "baseline": {
+        "week": "W10 (Oct 05 - Oct 09)",
+        "days": 5,
+        "trades": 66,
+        "wins": 15,
+        "wr": 22.7,
+        "gross": -15013.89,
+        "fees": 20407.16,
+        "net": -35421.05
+      },
+      "profit_max": {
+        "week": "W10 (Oct 05 - Oct 09)",
+        "days": 5,
+        "trades": 40,
+        "wins": 28,
+        "wr": 70.0,
+        "gross": 22865.57,
+        "fees": 12587.69,
+        "net": 10277.88
+      }
+    },
+    {
+      "week": "W11 (Oct 12 - Oct 16)",
+      "days": 5,
+      "baseline": {
+        "week": "W11 (Oct 12 - Oct 16)",
+        "days": 5,
+        "trades": 66,
+        "wins": 18,
+        "wr": 27.3,
+        "gross": -3960.61,
+        "fees": 21044.99,
+        "net": -25005.6
+      },
+      "profit_max": {
+        "week": "W11 (Oct 12 - Oct 16)",
+        "days": 5,
+        "trades": 33,
+        "wins": 25,
+        "wr": 75.8,
+        "gross": 22324.04,
+        "fees": 10279.59,
+        "net": 12044.45
+      }
+    },
+    {
+      "week": "W12 (Oct 19 - Oct 23)",
+      "days": 4,
+      "baseline": {
+        "week": "W12 (Oct 19 - Oct 23)",
+        "days": 4,
+        "trades": 41,
+        "wins": 12,
+        "wr": 29.3,
+        "gross": -2926.17,
+        "fees": 13016.11,
+        "net": -15942.28
+      },
+      "profit_max": {
+        "week": "W12 (Oct 19 - Oct 23)",
+        "days": 4,
+        "trades": 27,
+        "wins": 18,
+        "wr": 66.7,
+        "gross": 9759.78,
+        "fees": 8921.34,
+        "net": 838.44
+      }
+    },
+    {
+      "week": "W13 (Oct 26 - Oct 30)",
+      "days": 5,
+      "baseline": {
+        "week": "W13 (Oct 26 - Oct 30)",
+        "days": 5,
+        "trades": 59,
+        "wins": 11,
+        "wr": 18.6,
+        "gross": -27619.67,
+        "fees": 19192.71,
+        "net": -46812.38
+      },
+      "profit_max": {
+        "week": "W13 (Oct 26 - Oct 30)",
+        "days": 5,
+        "trades": 42,
+        "wins": 34,
+        "wr": 81.0,
+        "gross": 31452.04,
+        "fees": 12624.63,
+        "net": 18827.41
+      }
+    },
+    {
+      "week": "W14 (Nov 02 - Nov 05)",
+      "days": 4,
+      "baseline": {
+        "week": "W14 (Nov 02 - Nov 05)",
+        "days": 4,
+        "trades": 40,
+        "wins": 11,
+        "wr": 27.5,
+        "gross": -1610.47,
+        "fees": 12368.42,
+        "net": -13978.89
+      },
+      "profit_max": {
+        "week": "W14 (Nov 02 - Nov 05)",
+        "days": 4,
+        "trades": 31,
+        "wins": 24,
+        "wr": 77.4,
+        "gross": 29049.91,
+        "fees": 9472.53,
+        "net": 19577.38
+      }
+    }
+  ]
+}

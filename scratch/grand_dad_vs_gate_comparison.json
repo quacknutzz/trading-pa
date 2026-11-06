@@ -1,0 +1,212 @@
+{
+  "dad_week": {
+    "baseline": {
+      "trades": 59,
+      "wins": 8,
+      "wr": 13.6,
+      "gross": -1352.16,
+      "fees": 1482.87,
+      "net": -2835.03
+    },
+    "latest_0925_all": {
+      "trades": 41,
+      "wins": 30,
+      "wr": 73.2,
+      "gross": 3259.38,
+      "fees": 2348.08,
+      "net": 911.3
+    },
+    "latest_gated": {
+      "trades": 37,
+      "wins": 25,
+      "wr": 67.6,
+      "gross": 2362.39,
+      "fees": 2135.02,
+      "net": 227.37
+    }
+  },
+  "full_62d": {
+    "baseline": {
+      "trades": 698,
+      "wins": 158,
+      "wr": 22.6,
+      "gross": -2928.74,
+      "fees": 17282.45,
+      "net": -20211.19
+    },
+    "latest_0925_all": {
+      "trades": 404,
+      "wins": 278,
+      "wr": 68.8,
+      "gross": 31340.11,
+      "fees": 25719.26,
+      "net": 5620.85
+    },
+    "latest_gated": {
+      "trades": 382,
+      "wins": 266,
+      "wr": 69.6,
+      "gross": 30452.39,
+      "fees": 24921.4,
+      "net": 5530.99
+    }
+  },
+  "daily_dad_week": {
+    "baseline": [
+      {
+        "date": "2026-10-26",
+        "trades": 14,
+        "wins": 1,
+        "losses": 13,
+        "wr": 7.1,
+        "gross": -522.77,
+        "fees": 347.31,
+        "net": -870.08
+      },
+      {
+        "date": "2026-10-27",
+        "trades": 7,
+        "wins": 1,
+        "losses": 6,
+        "wr": 14.3,
+        "gross": -239.5,
+        "fees": 178.01,
+        "net": -417.51
+      },
+      {
+        "date": "2026-10-28",
+        "trades": 12,
+        "wins": 2,
+        "losses": 10,
+        "wr": 16.7,
+        "gross": 177.23,
+        "fees": 298.25,
+        "net": -121.02
+      },
+      {
+        "date": "2026-10-29",
+        "trades": 10,
+        "wins": 2,
+        "losses": 8,
+        "wr": 20.0,
+        "gross": -346.08,
+        "fees": 256.26,
+        "net": -602.34
+      },
+      {
+        "date": "2026-10-30",
+        "trades": 16,
+        "wins": 2,
+        "losses": 14,
+        "wr": 12.5,
+        "gross": -421.04,
+        "fees": 403.04,
+        "net": -824.08
+      }
+    ],
+    "latest_0925_all": [
+      {
+        "date": "2026-10-26",
+        "trades": 4,
+        "wins": 4,
+        "losses": 0,
+        "wr": 100.0,
+        "gross": 921.83,
+        "fees": 272.42,
+        "net": 649.41
+      },
+      {
+        "date": "2026-10-27",
+        "trades": 8,
+        "wins": 6,
+        "losses": 2,
+        "wr": 75.0,
+        "gross": 1844.49,
+        "fees": 460.69,
+        "net": 1383.8
+      },
+      {
+        "date": "2026-10-28",
+        "trades": 7,
+        "wins": 4,
+        "losses": 3,
+        "wr": 57.1,
+        "gross": -395.92,
+        "fees": 386.26,
+        "net": -782.18
+      },
+      {
+        "date": "2026-10-29",
+        "trades": 13,
+        "wins": 7,
+        "losses": 6,
+        "wr": 53.8,
+        "gross": -295.76,
+        "fees": 775.62,
+        "net": -1071.38
+      },
+      {
+        "date": "2026-10-30",
+        "trades": 9,
+        "wins": 9,
+        "losses": 0,
+        "wr": 100.0,
+        "gross": 1184.74,
+        "fees": 453.09,
+        "net": 731.65
+      }
+    ],
+    "latest_gated": [
+      {
+        "date": "2026-10-26",
+        "trades": 3,
+        "wins": 3,
+        "losses": 0,
+        "wr": 100.0,
+        "gross": 771.43,
+        "fees": 220.94,
+        "net": 550.49
+      },
+      {
+        "date": "2026-10-27",
+        "trades": 8,
+        "wins": 6,
+        "losses": 2,
+        "wr": 75.0,
+        "gross": 1844.49,
+        "fees": 460.69,
+        "net": 1383.8
+      },
+      {
+        "date": "2026-10-28",
+        "trades": 7,
+        "wins": 4,
+        "losses": 3,
+        "wr": 57.1,
+        "gross": -395.92,
+        "fees": 386.26,
+        "net": -782.18
+      },
+      {
+        "date": "2026-10-29",
+        "trades": 10,
+        "wins": 3,
+        "losses": 7,
+        "wr": 30.0,
+        "gross": -1042.35,
+        "fees": 614.04,
+        "net": -1656.39
+      },
+      {
+        "date": "2026-10-30",
+        "trades": 9,
+        "wins": 9,
+        "losses": 0,
+        "wr": 100.0,
+        "gross": 1184.74,
+        "fees": 453.09,
+        "net": 731.65
+      }
+    ]
+  }
+}

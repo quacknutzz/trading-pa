@@ -1,0 +1,80 @@
+time,symbol,side,ltp,rsi,adx,rvol,result,detail
+2026-11-03 09:25:00,IREDA,BUY,103.77,64.88,27.08,5.37,ORDER,limit BUY 321 @ 103.7699966430664 (5m EMA10 | Score 9.1)
+2026-11-03 09:30:00,CONCOR,BUY,428.4,64.96,21.42,8.84,ORDER,limit BUY 77 @ 428.3999938964844 (5m EMA10 | Score 14.6)
+2026-11-03 09:35:00,CONCOR,BUY,426.9,64.96,21.42,8.84,CANCELLED,Fix #2: No bounce confirmation (closed red or below VWAP/EMA30)
+2026-11-03 09:40:00,VOLTAS,BUY,1042.0,62.86,39.85,9.9,ORDER,limit BUY 31 @ 1042.0 (5m EMA10 | Score 17.1)
+2026-11-03 09:45:00,VOLTAS,BUY,1040.6,62.86,39.85,9.9,CANCELLED,Fix #2: No bounce confirmation (closed red or below VWAP/EMA30)
+2026-11-03 09:45:00,DRREDDY,BUY,1348.9,52.66,34.74,1.16,ORDER,limit BUY 24 @ 1348.9000244140625 (5m EMA10 | Score 3.5)
+2026-11-03 09:45:00,HCLTECH,BUY,1447.5,63.06,31.07,1.08,ORDER,limit BUY 23 @ 1441.27 (5m EMA10 | Score 2.9)
+2026-11-03 09:50:00,DRREDDY,BUY,1350.4,52.66,34.74,1.16,CANCELLED,Fix #1: Pre-fill contra flip invalidated setup (slot freed immediately)
+2026-11-03 09:50:00,UPL,BUY,521.0,56.95,42.02,2.85,ORDER,limit BUY 64 @ 520.73 (5m EMA200 | Score 6.9)
+2026-11-03 09:50:00,DRREDDY,BUY,1350.4,56.89,36.15,1.25,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 09:55:00,LODHA,BUY,1021.6,62.1,30.41,1.4,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 09:55:00,DRREDDY,BUY,1350.9,57.64,37.46,0.98,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 10:00:00,HCLTECH,BUY,1447.5,63.06,31.07,1.08,CANCELLED,limit 1441.27 untouched in 3 bars
+2026-11-03 10:00:00,CONCOR,BUY,429.35,64.38,31.55,1.59,ORDER,limit BUY 77 @ 429.3500061035156 (5m EMA10 | Score 4.2)
+2026-11-03 10:00:00,LODHA,BUY,1024.0,65.44,31.02,1.16,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 10:00:00,HCLTECH,BUY,1446.5,60.87,33.94,0.92,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 10:00:00,ETERNAL,BUY,348.25,63.15,20.17,0.82,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 10:05:00,LENSKART,BUY,671.3,58.64,33.73,0.96,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 10:05:00,DRREDDY,BUY,1350.8,59.21,38.2,0.97,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 10:05:00,EXIDEIND,BUY,342.15,64.78,22.0,1.02,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 10:10:00,NATIONALUM,SELL,322.0,36.05,29.73,2.84,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 10:15:00,LENSKART,BUY,672.95,63.49,37.27,0.97,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 10:15:00,JINDALSTEL,BUY,1106.9,61.92,21.73,1.89,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 10:20:00,DRREDDY,BUY,1352.7,63.88,39.04,0.82,ORDER,limit BUY 24 @ 1349.63 (5m EMA10 | Score 3.3)
+2026-11-03 10:25:00,LGEINDIA,BUY,1699.1,58.78,22.54,4.04,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 10:25:00,APOLLOTYRE,BUY,398.4,65.61,22.14,1.03,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 10:30:00,GODREJPROP,BUY,1646.2,64.04,41.04,1.78,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 10:30:00,ITC,BUY,266.65,53.56,28.42,1.89,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 10:35:00,DRREDDY,BUY,1352.7,63.88,39.04,0.82,CANCELLED,limit 1349.63 untouched in 3 bars
+2026-11-03 10:35:00,ITC,BUY,267.4,57.48,29.17,1.35,ORDER,limit BUY 124 @ 267.3999938964844 (5m EMA10 | Score 3.5)
+2026-11-03 10:35:00,SBILIFE,BUY,1668.5,57.33,27.6,1.04,ORDER,limit BUY 20 @ 1668.5 (5m EMA10 | Score 2.7)
+2026-11-03 10:40:00,ITC,BUY,266.4,57.48,29.17,1.35,CANCELLED,Fix #2: No bounce confirmation (closed red or below VWAP/EMA30)
+2026-11-03 10:40:00,SBILIFE,BUY,1667.8,57.33,27.6,1.04,CANCELLED,Fix #2: No bounce confirmation (closed red or below VWAP/EMA30)
+2026-11-03 10:40:00,INDUSTOWER,BUY,386.65,60.89,24.73,0.99,ORDER,limit BUY 86 @ 386.6499938964844 (5m EMA10 | Score 2.3)
+2026-11-03 10:40:00,JUBLFOOD,BUY,427.7,57.04,21.18,0.95,ORDER,limit BUY 78 @ 427.70001220703125 (5m EMA10 | Score 1.8)
+2026-11-03 10:45:00,JUBLFOOD,BUY,427.6,57.04,21.18,0.95,CANCELLED,Fix #2: No bounce confirmation (closed red or below VWAP/EMA30)
+2026-11-03 10:50:00,OIL,SELL,453.25,38.35,33.55,1.64,ORDER,limit SELL 73 @ 453.25 (5m EMA10 | Score 4.4)
+2026-11-03 10:50:00,LENSKART,BUY,671.6,56.32,41.11,0.92,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 10:55:00,OIL,SELL,453.65,38.35,33.55,1.64,CANCELLED,Fix #2: No bounce confirmation (closed green or above VWAP/EMA30)
+2026-11-03 10:55:00,ITC,BUY,267.6,55.46,28.92,0.98,ORDER,limit BUY 124 @ 267.6000061035156 (5m EMA10 | Score 2.9)
+2026-11-03 11:00:00,NTPC,SELL,320.05,36.91,35.65,1.32,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 11:05:00,OIL,SELL,452.55,35.66,35.44,4.93,ORDER,limit SELL 72 @ 452.54998779296875 (5m EMA10 | Score 9.4)
+2026-11-03 11:10:00,TATACOMM,BUY,1757.5,57.2,20.02,13.51,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 11:10:00,LENSKART,BUY,672.55,61.8,42.31,1.5,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 11:15:00,ADANIPORTS,BUY,1856.1,60.54,21.09,1.98,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 11:25:00,UNITDSPR,BUY,1353.8,59.9,21.91,1.98,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 11:30:00,LICHSGFIN,BUY,505.1,65.06,43.41,7.6,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 11:30:00,UNITDSPR,BUY,1355.0,63.01,22.73,1.79,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 11:30:00,CIPLA,BUY,1382.7,62.14,25.02,0.86,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 11:45:00,GAIL,BUY,180.98,64.58,30.11,3.84,ORDER,limit BUY 183 @ 180.97999572753906 (5m EMA10 | Score 7.6)
+2026-11-03 11:45:00,TATACOMM,BUY,1757.6,60.87,20.64,2.41,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 11:50:00,GAIL,BUY,180.85,64.58,30.11,3.84,CANCELLED,Fix #2: No bounce confirmation (closed red or below VWAP/EMA30)
+2026-11-03 11:50:00,TATACAP,BUY,328.85,62.68,31.46,2.04,ORDER,limit BUY 101 @ 328.8500061035156 (5m EMA10 | Score 4.5)
+2026-11-03 11:50:00,FORTIS,BUY,774.7,63.39,42.53,0.86,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 11:50:00,TATACOMM,BUY,1760.0,64.5,21.45,1.29,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 11:50:00,WIPRO,BUY,197.57,64.54,20.35,1.17,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 11:55:00,SBICARD,BUY,542.6,65.42,22.8,1.08,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 12:00:00,INDUSINDBK,BUY,848.2,58.41,26.22,1.71,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 12:05:00,SWIGGY,BUY,179.65,57.33,24.24,2.3,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 12:10:00,GAIL,BUY,180.99,64.97,32.8,2.11,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 12:15:00,ABCAPITAL,BUY,382.85,63.03,21.86,6.22,ORDER,limit BUY 86 @ 382.8500061035156 (5m EMA10 | Score 10.3)
+2026-11-03 12:15:00,SWIGGY,BUY,179.87,60.78,25.47,1.44,NO_SLOT,"qualified, but slots/cash currently deployed"
+2026-11-03 12:20:00,ABCAPITAL,BUY,382.65,63.03,21.86,6.22,CANCELLED,Fix #2: No bounce confirmation (closed red or below VWAP/EMA30)
+2026-11-03 12:20:00,COALINDIA,SELL,405.75,41.55,24.25,4.14,ORDER,limit SELL 81 @ 405.75 (5m EMA10 | Score 7.0)
+2026-11-03 12:25:00,COALINDIA,SELL,405.65,41.55,24.25,4.14,CANCELLED,Fix #1: Pre-fill contra flip invalidated setup (slot freed immediately)
+2026-11-03 12:25:00,COALINDIA,SELL,405.65,41.02,25.57,1.76,ORDER,limit SELL 82 @ 405.6499938964844 (5m EMA10 | Score 3.6)
+2026-11-03 12:30:00,COALINDIA,SELL,405.4,41.02,25.57,1.76,CANCELLED,Fix #1: Pre-fill contra flip invalidated setup (slot freed immediately)
+2026-11-03 12:30:00,SWIGGY,BUY,179.82,59.48,27.74,1.69,ORDER,limit BUY 185 @ 179.82000732421875 (5m EMA10 | Score 3.6)
+2026-11-03 12:35:00,SWIGGY,BUY,179.14,59.48,27.74,1.69,CANCELLED,Fix #2: No bounce confirmation (closed red or below VWAP/EMA30)
+2026-11-03 12:40:00,NTPC,SELL,319.0,37.33,30.23,1.85,ORDER,limit SELL 104 @ 319.0 (5m EMA10 | Score 4.3)
+2026-11-03 12:40:00,IRFC,SELL,75.75,39.82,25.16,1.57,ORDER,limit SELL 438 @ 75.86 (5m EMA100 | Score 3.4)
+2026-11-03 12:45:00,NTPC,SELL,319.15,37.33,30.23,1.85,CANCELLED,Fix #2: No bounce confirmation (closed green or above VWAP/EMA30)
+2026-11-03 12:50:00,IRFC,SELL,75.92,39.82,25.16,1.57,CANCELLED,Fix #2: No bounce confirmation (closed green or above VWAP/EMA30)
+2026-11-03 12:50:00,ASTRAL,BUY,1383.8,58.88,25.49,0.87,ORDER,limit BUY 24 @ 1383.800048828125 (5m EMA10 | Score 2.6)
+2026-11-03 12:55:00,ASTRAL,BUY,1382.1,58.88,25.49,0.87,CANCELLED,Fix #2: No bounce confirmation (closed red or below VWAP/EMA30)
+2026-11-03 12:55:00,HUDCO,SELL,146.81,43.79,33.37,2.63,ORDER,limit SELL 226 @ 146.94 (5m EMA100 | Score 5.6)
+2026-11-03 13:00:00,BEL,SELL,377.2,38.7,27.55,1.35,ORDER,limit SELL 88 @ 377.49 (5m EMA100 | Score 3.3)
+2026-11-03 13:05:00,BEL,SELL,377.3,38.7,27.55,1.35,CANCELLED,Fix #2: No bounce confirmation (closed green or above VWAP/EMA30)
+2026-11-03 13:10:00,HUDCO,SELL,146.81,43.79,33.37,2.63,CANCELLED,limit 146.94 untouched in 3 bars

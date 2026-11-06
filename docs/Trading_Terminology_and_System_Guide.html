@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trading System Technical & Financial Handbook | Cockpit V6 & BTB System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+    :root {
+      --bg-primary: #111111;
+      --bg-secondary: #181818;
+      --bg-tertiary: #202020;
+      --border-subtle: #2c2c2c;
+      --border-strong: #383838;
+      --text-primary: #f0f0f0;
+      --text-secondary: #a3a3a3;
+      --text-muted: #737373;
+      --accent-gold: #e5a93c;
+      --accent-gold-hover: #d4962b;
+      --bullish: #22c55e;
+      --bearish: #ef4444;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #111111;
+      color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Flat Matte Theme Elements */
+    .card-panel {
+      background-color: #181818;
+      border: 1px solid #2c2c2c;
+    }
+
+    .card-panel-inner {
+      background-color: #202020;
+      border: 1px solid #2c2c2c;
+    }
+
+    .card-hover {
+      transition: border-color 0.15s ease, background-color 0.15s ease;
+    }
+
+    .card-hover:hover {
+      border-color: #404040;
+      background-color: #1c1c1c;
+    }
+
+    /* Filter Buttons */
+    .filter-btn {
+      background-color: #181818;
+      color: #a3a3a3;
+      border: 1px solid #2c2c2c;
+      transition: all 0.15s ease;
+    }
+
+    .filter-btn:hover {
+      color: #f0f0f0;
+      border-color: #404040;
+      background-color: #202020;
+    }
+
+    .filter-btn.tab-active {
+      background-color: #e5a93c !important;
+      color: #111111 !important;
+      border-color: #e5a93c !important;
+      font-weight: 700 !important;
+    }
+
+    /* Custom range sliders */
+    input[type="range"] {
+      accent-color: #e5a93c;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #111111;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2c2c2c;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #383838;
+    }
+  </style>
+</head>
+<body class="min-h-screen p-4 md:p-8">
+
+  <!-- Header Banner -->
+  <header class="max-w-7xl mx-auto mb-8">
+    <div class="card-panel rounded-xl p-6 md:p-8">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div>
+          <div class="flex flex-wrap items-center gap-2 mb-3">
+            <span class="px-2.5 py-0.5 rounded text-xs font-semibold bg-[#202020] text-emerald-400 border border-emerald-500/30">
+              <i class="fa-solid fa-circle-check mr-1 text-[10px]"></i> Simulation Ready (0 Capital Required)
+            </span>
+            <span class="px-2.5 py-0.5 rounded text-xs font-semibold bg-[#202020] text-[#e5a93c] border border-[#e5a93c]/30">
+              <i class="fa-solid fa-bolt mr-1 text-[10px]"></i> NSE Cash / F&amp;O Engine
+            </span>
+            <span class="px-2.5 py-0.5 rounded text-xs font-semibold bg-[#202020] text-[#a3a3a3] border border-[#2c2c2c]">
+              <i class="fa-solid fa-microchip mr-1 text-[10px]"></i> Cockpit V6 System
+            </span>
+          </div>
+          <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-[#f0f0f0]">
+            Trading System Technical &amp; Financial Handbook
+          </h1>
+          <p class="text-[#a3a3a3] mt-2 text-sm md:text-base max-w-3xl leading-relaxed">
+            Interactive quantitative guide covering all technical indicators, Indian equity statutory tax mechanics, risk-adjusted expectancy equations, and proprietary BTB algorithms used in <span class="text-[#e5a93c] mono font-semibold">cockpit_v6_engine.py</span> &amp; <span class="text-[#e5a93c] mono font-semibold">AI_BTB_Dashboard.xlsm</span>.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <a href="#tax-optimization" class="px-4 py-2.5 rounded-lg bg-[#202020] hover:bg-[#282828] text-[#f0f0f0] font-semibold text-sm border border-[#2c2c2c] transition flex items-center gap-2">
+            <i class="fa-solid fa-shield-halved text-[#e5a93c]"></i> Tax Shield
+          </a>
+          <a href="#calculator" class="px-4 py-2.5 rounded-lg bg-[#e5a93c] hover:bg-[#d4962b] text-[#111111] font-bold text-sm transition flex items-center gap-2 shadow-sm">
+            <i class="fa-solid fa-calculator"></i> Friction Calculator
+          </a>
+          <a href="#shock-simulator" class="px-4 py-2.5 rounded-lg bg-[#202020] hover:bg-[#282828] text-[#f0f0f0] font-semibold text-sm border border-[#2c2c2c] transition flex items-center gap-2">
+            <i class="fa-solid fa-bolt text-[#e5a93c]"></i> Shock Simulator
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto space-y-8">
+
+    <!-- Interactive Search & Filter Bar -->
+    <section class="card-panel rounded-xl p-5">
+      <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+        <!-- Search Input -->
+        <div class="relative flex-1">
+          <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-[#737373] text-sm"></i>
+          <input 
+            type="text" 
+            id="searchInput" 
+            placeholder="Search terms, indicators (e.g. RSI, ADX, STT, Pullback, Slippage, Tax-Shield)..." 
+            class="w-full pl-11 pr-4 py-2.5 bg-[#202020] border border-[#2c2c2c] rounded-lg text-[#f0f0f0] placeholder-[#737373] text-sm focus:outline-none focus:border-[#e5a93c] transition"
+            onkeyup="filterTerms()"
+          >
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="flex flex-wrap items-center gap-2" id="categoryFilters">
+          <button onclick="setCategory('all')" class="cat-btn filter-btn tab-active px-3 py-1.5 rounded-lg text-xs font-semibold" data-cat="all">All Terms (17)</button>
+          <button onclick="setCategory('v6')" class="cat-btn filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold" data-cat="v6">V6 Core Strategy</button>
+          <button onclick="setCategory('indicator')" class="cat-btn filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold" data-cat="indicator">Indicators</button>
+          <button onclick="setCategory('btb')" class="cat-btn filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold" data-cat="btb">BTB Microstructure</button>
+          <button onclick="setCategory('friction')" class="cat-btn filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold" data-cat="friction">Indian Market Costs</button>
+          <button onclick="setCategory('mechanics')" class="cat-btn filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold" data-cat="mechanics">Execution Terms</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Term Cards Grid -->
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="termsGrid">
+      
+      <!-- Card: 10m/30 EMA Cross -->
+      <div class="card-panel card-hover rounded-xl p-5 flex flex-col justify-between term-card" data-cat="v6 indicator" data-keywords="ema exponential moving average crossover 10 30 bullish bearish trend">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#202020] text-[#e5a93c] border border-[#2c2c2c]">V6 CORE STRATEGY</span>
+            <span class="text-xs text-[#737373] mono">Col DJ in Sheet1</span>
+          </div>
+          <h3 class="text-base font-bold text-[#f0f0f0] mb-2 flex items-center gap-2">
+            <i class="fa-solid fa-chart-line text-[#e5a93c]"></i> EMA 10/30 Crossover
+          </h3>
+          <p class="text-[#a3a3a3] text-xs leading-relaxed mb-3">
+            <strong class="text-[#f0f0f0]">Exponential Moving Average (EMA)</strong> applies higher mathematical weight to recent candles. When the fast 10-period EMA crosses above the slow 30-period EMA on a 10-minute candle, it flags that immediate short-term momentum has decoupled positively from the session average.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-[#2c2c2c] text-[11px] text-[#737373] space-y-1">
+          <div><strong class="text-[#a3a3a3]">Strategy Use:</strong> Master Entry Trigger (Bullish = Buy, Bearish = Sell).</div>
+          <div><strong class="text-[#e5a93c]">Watch Out:</strong> Entering on forming candles triggers false whipsaws before the candle closes.</div>
+        </div>
+      </div>
+
+      <!-- Card: Pullback Limit Order -->
+      <div class="card-panel card-hover rounded-xl p-5 flex flex-col justify-between term-card" data-cat="v6 mechanics" data-keywords="pullback limit order entry dip support resistance ema 5m selectnearestpullbackema">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#202020] text-emerald-400 border border-[#2c2c2c]">EXECUTION LOGIC</span>
+            <span class="text-xs text-[#737373] mono">SelectNearestPullbackEMA()</span>
+          </div>
+          <h3 class="text-base font-bold text-[#f0f0f0] mb-2 flex items-center gap-2">
+            <i class="fa-solid fa-arrow-down-left-and-arrow-up-right-to-center text-emerald-400"></i> Pullback Limit Order
+          </h3>
+          <p class="text-[#a3a3a3] text-xs leading-relaxed mb-3">
+            Instead of buying at current market price (LTP) and chasing expensive breakouts, the engine calculates the nearest 5m EMA (10, 30, 50, 100, 200) below the price for BUY orders, placing a resting limit order at that dynamic support level.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-[#2c2c2c] text-[11px] text-[#737373] space-y-1">
+          <div><strong class="text-[#a3a3a3]">Why It's Smart:</strong> Ensures you "Buy the Dip" at technical support rather than getting trapped at the candle high.</div>
+          <div><strong class="text-[#e5a93c]">Expiry Rule:</strong> If unfilled within 3 completed 5m bars (15 mins), order is cancelled.</div>
+        </div>
+      </div>
+
+      <!-- Card: 2-Tier Tax-Shield Ratchet -->
+      <div class="card-panel card-hover rounded-xl p-5 flex flex-col justify-between term-card" data-cat="v6 mechanics friction" data-keywords="tax shield ratchet mfe breakeven trailing stop lock +0.45% +0.75% profit">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#202020] text-[#e5a93c] border border-[#e5a93c]/30">V6 PROFIT OPTIMIZATION</span>
+            <span class="text-xs text-[#737373] mono">Risk Engine V6.2</span>
+          </div>
+          <h3 class="text-base font-bold text-[#f0f0f0] mb-2 flex items-center gap-2">
+            <i class="fa-solid fa-shield-halved text-[#e5a93c]"></i> 2-Tier Tax-Shield Ratchet
+          </h3>
+          <p class="text-[#a3a3a3] text-xs leading-relaxed mb-3">
+            Dynamic profit protection protocol that overcomes Indian statutory friction: at <strong class="text-[#f0f0f0]">+0.45% MFE</strong>, stop ratchets to Breakeven +0.15% (clearing the 0.113% tax drag). At <strong class="text-[#f0f0f0]">+0.75% MFE</strong>, it trails 55% of peak gains.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-[#2c2c2c] text-[11px] text-[#737373] space-y-1">
+          <div><strong class="text-[#a3a3a3]">Core Purpose:</strong> Eliminates green-to-red post-tax reversals (e.g. PHOENIXLTD).</div>
+          <div><strong class="text-emerald-400">Guaranteed Yield:</strong> Protects minimum net green return once momentum confirms.</div>
+        </div>
+      </div>
+
+      <!-- Card: 4-Slot Capital Concentration -->
+      <div class="card-panel card-hover rounded-xl p-5 flex flex-col justify-between term-card" data-cat="v6 mechanics friction" data-keywords="concentration slot sizing capital dilution brokerage drag 4-slot 6-slot 2.5l 1.66l">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#202020] text-emerald-400 border border-[#2c2c2c]">CAPITAL SIZING</span>
+            <span class="text-xs text-[#737373] mono">₹2.5L / Slot</span>
+          </div>
+          <h3 class="text-base font-bold text-[#f0f0f0] mb-2 flex items-center gap-2">
+            <i class="fa-solid fa-cubes text-emerald-400"></i> 4-Slot Position Concentration
+          </h3>
+          <p class="text-[#a3a3a3] text-xs leading-relaxed mb-3">
+            Allocating capital into 4 slots (₹2,50,000 each on ₹10L total) instead of 6 slots (₹1,66,000) dilutes the fixed ₹40 broker fee from 0.024% down to 0.016% of trade value, slashing fixed brokerage overhead by 33.3%.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-[#2c2c2c] text-[11px] text-[#737373] space-y-1">
+          <div><strong class="text-[#a3a3a3]">Brokerage Impact:</strong> 33.3% lower fixed cost burden per round trip.</div>
+          <div><strong class="text-[#e5a93c]">Quality Edge:</strong> Concentrates capital strictly into the highest-conviction momentum setups.</div>
+        </div>
+      </div>
+
+      <!-- Card: RSI -->
+      <div class="card-panel card-hover rounded-xl p-5 flex flex-col justify-between term-card" data-cat="v6 indicator" data-keywords="rsi relative strength index momentum exhaustion overbought oversold wilder">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#202020] text-[#f0f0f0] border border-[#2c2c2c]">INDICATOR</span>
+            <span class="text-xs text-[#737373] mono">Col DI (10m) &amp; U-X</span>
+          </div>
+          <h3 class="text-base font-bold text-[#f0f0f0] mb-2 flex items-center gap-2">
+            <i class="fa-solid fa-wave-square text-[#e5a93c]"></i> RSI (Relative Strength Index)
+          </h3>
+          <p class="text-[#a3a3a3] text-xs leading-relaxed mb-3">
+            Oscillator ranging from 0 to 100 measuring price speed and velocity magnitude. In momentum trend systems, the 52–64 range confirms clean buying power without the exhaustion risk that occurs above 75.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-[#2c2c2c] text-[11px] text-[#737373] space-y-1">
+          <div><strong class="text-[#a3a3a3]">Strategy Use:</strong> Filters out weak momentum or over-extended trades.</div>
+          <div><strong class="text-[#ef4444]">Regime Filter:</strong> Never initiate intraday short positions when 10m RSI is above 52.</div>
+        </div>
+      </div>
+
+      <!-- Card: ADX -->
+      <div class="card-panel card-hover rounded-xl p-5 flex flex-col justify-between term-card" data-cat="v6 indicator" data-keywords="adx average directional index trend strength chop consolidation wilder 14">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#202020] text-[#e5a93c] border border-[#2c2c2c]">V6 CORE STRATEGY</span>
+            <span class="text-xs text-[#737373] mono">Col CB (14-period)</span>
+          </div>
+          <h3 class="text-base font-bold text-[#f0f0f0] mb-2 flex items-center gap-2">
+            <i class="fa-solid fa-gauge-high text-[#e5a93c]"></i> ADX (Average Directional Index)
+          </h3>
+          <p class="text-[#a3a3a3] text-xs leading-relaxed mb-3">
+            Measures the <em class="text-[#f0f0f0]">strength of a trend</em> regardless of direction. ADX &lt; 20 indicates a choppy, sideways consolidation where trend bots get chopped to pieces. ADX &gt; 20 confirms active directional flow.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-[#2c2c2c] text-[11px] text-[#737373] space-y-1">
+          <div><strong class="text-[#a3a3a3]">Entry Gate:</strong> Entry requires Stock ADX &ge; 20 (avoids losing money in chop).</div>
+          <div><strong class="text-emerald-400">Exit Trigger:</strong> If 5m ADX drops below 18, momentum is dead; exit position.</div>
+        </div>
+      </div>
+
+      <!-- Card: ATR -->
+      <div class="card-panel card-hover rounded-xl p-5 flex flex-col justify-between term-card" data-cat="indicator" data-keywords="atr average true range volatility stops dynamic risk points">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#202020] text-[#a3a3a3] border border-[#2c2c2c]">INDICATOR</span>
+            <span class="text-xs text-[#737373] mono">Cols CC (5m) &amp; CD (15m)</span>
+          </div>
+          <h3 class="text-base font-bold text-[#f0f0f0] mb-2 flex items-center gap-2">
+            <i class="fa-solid fa-arrows-up-down text-[#e5a93c]"></i> ATR (Average True Range)
+          </h3>
+          <p class="text-[#a3a3a3] text-xs leading-relaxed mb-3">
+            Calculates the true average price movement of a stock per candle in absolute rupees. A high-beta defense stock moves ₹15 per 5m bar, while large-cap banks move ₹4.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-[#2c2c2c] text-[11px] text-[#737373] space-y-1">
+          <div><strong class="text-[#a3a3a3]">Why It Matters:</strong> Fixed percentage stops fail because volatile stocks breach 1% in 2 minutes of normal market noise.</div>
+          <div><strong class="text-[#e5a93c]">Best Practice:</strong> Set stops to 1.5x ATR instead of a naive flat percentage.</div>
+        </div>
+      </div>
+
+      <!-- Card: STT (Securities Transaction Tax) -->
+      <div class="card-panel card-hover rounded-xl p-5 flex flex-col justify-between term-card" data-cat="friction" data-keywords="stt securities transaction tax government statutory friction tax sebi">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#202020] text-[#e5a93c] border border-[#e5a93c]/30">INDIAN STATUTORY TAX</span>
+            <span class="text-xs text-[#737373] mono">NSE Statutory</span>
+          </div>
+          <h3 class="text-base font-bold text-[#f0f0f0] mb-2 flex items-center gap-2">
+            <i class="fa-solid fa-landmark text-[#e5a93c]"></i> STT (Securities Transaction Tax)
+          </h3>
+          <p class="text-[#a3a3a3] text-xs leading-relaxed mb-3">
+            Direct tax levied by the Central Government on all stock transactions. For intraday equity cash (MIS), STT is <strong class="text-[#f0f0f0]">0.025% charged exclusively on the sell side</strong> turnover.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-[#2c2c2c] text-[11px] text-[#737373] space-y-1">
+          <div><strong class="text-[#a3a3a3]">Cost Impact:</strong> On a ₹2,00,000 turnover trade, STT consumes ₹50 immediately, win or lose.</div>
+          <div><strong class="text-[#e5a93c]">Key Reality:</strong> Ultra-short micro scalping transfers massive capital to the treasury.</div>
+        </div>
+      </div>
+
+      <!-- Card: Slippage -->
+      <div class="card-panel card-hover rounded-xl p-5 flex flex-col justify-between term-card" data-cat="friction mechanics" data-keywords="slippage bid ask spread fill market impact latency execution friction">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#202020] text-[#ef4444] border border-[#ef4444]/30">HIDDEN FRICTION</span>
+            <span class="text-xs text-[#737373] mono">Market Execution</span>
+          </div>
+          <h3 class="text-base font-bold text-[#f0f0f0] mb-2 flex items-center gap-2">
+            <i class="fa-solid fa-person-falling text-[#ef4444]"></i> Slippage &amp; Bid-Ask Spread
+          </h3>
+          <p class="text-[#a3a3a3] text-xs leading-relaxed mb-3">
+            The difference between the expected signal price and the actual traded price. Market orders fill at the opposing Bid or Ask. During volatility, spread slippage extracts 0.04% to 0.10% per round trip.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-[#2c2c2c] text-[11px] text-[#737373] space-y-1">
+          <div><strong class="text-[#a3a3a3]">Root Cause:</strong> Latency, order book depth gaps, and queue position priority.</div>
+          <div><strong class="text-emerald-400">V6 Defense:</strong> Placing passive limit orders at EMA support saves spread cost.</div>
+        </div>
+      </div>
+
+      <!-- Card: Expectancy & Risk-Reward Ratio -->
+      <div class="card-panel card-hover rounded-xl p-5 flex flex-col justify-between term-card" data-cat="mechanics" data-keywords="expectancy risk reward ratio r:r payoff win rate breakeven math">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#202020] text-[#e5a93c] border border-[#2c2c2c]">QUANT MATHEMATICS</span>
+            <span class="text-xs text-[#737373] mono">E = (W * Aw) - (L * Al)</span>
+          </div>
+          <h3 class="text-base font-bold text-[#f0f0f0] mb-2 flex items-center gap-2">
+            <i class="fa-solid fa-scale-balanced text-[#e5a93c]"></i> Mathematical Expectancy &amp; R:R
+          </h3>
+          <p class="text-[#a3a3a3] text-xs leading-relaxed mb-3">
+            Expectancy dictates whether a strategy survives over 1,000 trades. Win rate alone is meaningless without the <strong class="text-[#f0f0f0]">Payoff Ratio (Average Net Win &divide; Average Net Loss)</strong> after statutory friction.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-[#2c2c2c] text-[11px] text-[#737373] space-y-1">
+          <div><strong class="text-[#a3a3a3]">The Equation:</strong> $E = (\text{Win\%} \times \text{Avg Win}) - (\text{Loss\%} \times \text{Avg Loss}) - \text{Taxes}$</div>
+          <div><strong class="text-[#e5a93c]">Target Mandate:</strong> Net target must deliver at least 1.35x realized risk to thrive.</div>
+        </div>
+      </div>
+
+      <!-- Card: BTB Volatility Compression -->
+      <div class="card-panel card-hover rounded-xl p-5 flex flex-col justify-between term-card" data-cat="btb" data-keywords="btb compression donchian squeeze breakout expansion volatility">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#202020] text-[#f0f0f0] border border-[#2c2c2c]">BTB ENGINE</span>
+            <span class="text-xs text-[#737373] mono">Cols EA &amp; ER</span>
+          </div>
+          <h3 class="text-base font-bold text-[#f0f0f0] mb-2 flex items-center gap-2">
+            <i class="fa-solid fa-compress text-[#e5a93c]"></i> Volatility Compression
+          </h3>
+          <p class="text-[#a3a3a3] text-xs leading-relaxed mb-3">
+            Evaluates the width of the 20-period Donchian channel relative to ATR. When an instrument consolidates inside an unusually narrow corridor, volatility coils like a loaded spring ahead of an expansion burst.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-[#2c2c2c] text-[11px] text-[#737373] space-y-1">
+          <div><strong class="text-[#a3a3a3]">Formula:</strong> $\text{CompressionPct} = (\text{High}_{20} - \text{Low}_{20}) / \text{LTP}$</div>
+          <div><strong class="text-emerald-400">Trigger:</strong> Squeeze release accompanied by volume surge triggers the highest-probability moves.</div>
+        </div>
+      </div>
+
+      <!-- Card: Relative Strength & Alpha Slope -->
+      <div class="card-panel card-hover rounded-xl p-5 flex flex-col justify-between term-card" data-cat="btb" data-keywords="btb relative strength alpha slope nifty beta benchmark outperformance">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#202020] text-[#f0f0f0] border border-[#2c2c2c]">BTB ENGINE</span>
+            <span class="text-xs text-[#737373] mono">Cols EB &amp; EC</span>
+          </div>
+          <h3 class="text-base font-bold text-[#f0f0f0] mb-2 flex items-center gap-2">
+            <i class="fa-solid fa-bolt-lightning text-[#e5a93c]"></i> Relative Strength &amp; Alpha Slope
+          </h3>
+          <p class="text-[#a3a3a3] text-xs leading-relaxed mb-3">
+            Tracks individual stock rate of change relative to the Nifty 50 benchmark. Alpha Slope is the first derivative ($d/dt$), detecting whether an asset's outperformance is accelerating or decaying.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-[#2c2c2c] text-[11px] text-[#737373] space-y-1">
+          <div><strong class="text-[#a3a3a3]">Why It's Essential:</strong> Eliminates passive beta drift (moving solely because Nifty floated up).</div>
+          <div><strong class="text-emerald-400">Alpha Edge:</strong> Focuses dry powder exclusively on stocks exhibiting institutional sponsorship.</div>
+        </div>
+      </div>
+
+      <!-- Card: Level 1 Depth Imbalance -->
+      <div class="card-panel card-hover rounded-xl p-5 flex flex-col justify-between term-card" data-cat="btb mechanics" data-keywords="l1 depth imbalance order book bid ask liquidity absorption spreadbps">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#202020] text-[#f0f0f0] border border-[#2c2c2c]">MICROSTRUCTURE</span>
+            <span class="text-xs text-[#737373] mono">Cols EI to EQ</span>
+          </div>
+          <h3 class="text-base font-bold text-[#f0f0f0] mb-2 flex items-center gap-2">
+            <i class="fa-solid fa-layer-group text-[#e5a93c]"></i> L1 Order Book Depth Imbalance
+          </h3>
+          <p class="text-[#a3a3a3] text-xs leading-relaxed mb-3">
+            Assesses top-of-book liquidity: $(\text{BidQty} - \text{AskQty}) / (\text{BidQty} + \text{AskQty})$. Quantifies whether buyers or sellers are stacking passive resting orders to absorb oncoming market volume.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-[#2c2c2c] text-[11px] text-[#737373] space-y-1">
+          <div><strong class="text-[#a3a3a3]">Spread Bps:</strong> Flags wide bid-ask gaps to prevent filling at adverse execution levels.</div>
+          <div><strong class="text-emerald-400">Protection:</strong> Prevents firing buy orders directly into dense passive ask walls.</div>
+        </div>
+      </div>
+
+      <!-- Card: VWAP -->
+      <div class="card-panel card-hover rounded-xl p-5 flex flex-col justify-between term-card" data-cat="indicator" data-keywords="vwap volume weighted average price institutional benchmark intraday mean">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#202020] text-[#a3a3a3] border border-[#2c2c2c]">INDICATOR</span>
+            <span class="text-xs text-[#737373] mono">Col BR</span>
+          </div>
+          <h3 class="text-base font-bold text-[#f0f0f0] mb-2 flex items-center gap-2">
+            <i class="fa-solid fa-water text-[#e5a93c]"></i> VWAP (Volume-Weighted Avg Price)
+          </h3>
+          <p class="text-[#a3a3a3] text-xs leading-relaxed mb-3">
+            The intraday benchmark execution price weighted by traded volume. Used globally by mutual funds and institutional algorithms to evaluate execution quality. Trading above VWAP is bullish; below is bearish.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-[#2c2c2c] text-[11px] text-[#737373] space-y-1">
+          <div><strong class="text-[#a3a3a3]">Strategy Role:</strong> Acts as an intraday gravitational mean and primary dynamic support line.</div>
+        </div>
+      </div>
+
+      <!-- Card: MFE & MAE -->
+      <div class="card-panel card-hover rounded-xl p-5 flex flex-col justify-between term-card" data-cat="mechanics" data-keywords="mfe mae maximum favorable adverse excursion trade analysis peak drawdown">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#202020] text-[#e5a93c] border border-[#2c2c2c]">TRADE TELEMETRY</span>
+            <span class="text-xs text-[#737373] mono">Cols AD &amp; AE in COCKPIT_V6</span>
+          </div>
+          <h3 class="text-base font-bold text-[#f0f0f0] mb-2 flex items-center gap-2">
+            <i class="fa-solid fa-mountain-sun text-[#e5a93c]"></i> MFE &amp; MAE
+          </h3>
+          <p class="text-[#a3a3a3] text-xs leading-relaxed mb-3">
+            <strong class="text-[#f0f0f0]">MFE (Maximum Favorable Excursion)</strong> is the highest profit a trade reached before close. <strong class="text-[#f0f0f0]">MAE (Maximum Adverse Excursion)</strong> is the maximum drawdown suffered during the trade.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-[#2c2c2c] text-[11px] text-[#737373] space-y-1">
+          <div><strong class="text-[#a3a3a3]">Diagnostic Value:</strong> If MFE frequently peaks above +1.0% but exits at a loss, trailing logic is failing.</div>
+        </div>
+      </div>
+
+      <!-- Card: SuperTrend -->
+      <div class="card-panel card-hover rounded-xl p-5 flex flex-col justify-between term-card" data-cat="indicator" data-keywords="supertrend atr trailing trend stop volatility direction">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#202020] text-[#a3a3a3] border border-[#2c2c2c]">INDICATOR</span>
+            <span class="text-xs text-[#737373] mono">Cols P, BU, BV</span>
+          </div>
+          <h3 class="text-base font-bold text-[#f0f0f0] mb-2 flex items-center gap-2">
+            <i class="fa-solid fa-shield-halved text-[#e5a93c]"></i> SuperTrend
+          </h3>
+          <p class="text-[#a3a3a3] text-xs leading-relaxed mb-3">
+            Volatility-adaptive trailing envelope combining ATR with a multiplier. Plots above price in a downtrend (resistance) and below price in an uptrend (support).
+          </p>
+        </div>
+        <div class="pt-3 border-t border-[#2c2c2c] text-[11px] text-[#737373] space-y-1">
+          <div><strong class="text-[#a3a3a3]">Multi-Timeframe:</strong> Monitored across 5m and 1D charts to avoid fighting higher timeframe trend regimes.</div>
+        </div>
+      </div>
+
+      <!-- Card: MACD -->
+      <div class="card-panel card-hover rounded-xl p-5 flex flex-col justify-between term-card" data-cat="indicator" data-keywords="macd moving average convergence divergence signal histogram momentum 12 26 9">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#202020] text-[#a3a3a3] border border-[#2c2c2c]">INDICATOR</span>
+            <span class="text-xs text-[#737373] mono">Cols Y-AB &amp; CY-DD</span>
+          </div>
+          <h3 class="text-base font-bold text-[#f0f0f0] mb-2 flex items-center gap-2">
+            <i class="fa-solid fa-bezier-curve text-[#e5a93c]"></i> MACD (Fast, Slow &amp; Signal)
+          </h3>
+          <p class="text-[#a3a3a3] text-xs leading-relaxed mb-3">
+            Moving Average Convergence Divergence. Compares the 12 EMA and 26 EMA smoothed by a 9-period signal line, identifying expanding momentum cycles across multi-timeframe candle aggregations.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-[#2c2c2c] text-[11px] text-[#737373] space-y-1">
+          <div><strong class="text-[#a3a3a3]">Application:</strong> Used in screener filters for multi-timeframe momentum confirmation.</div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SECTION: TAX-HURDLE & NET-PROFIT OPTIMIZATION -->
+    <section id="tax-optimization" class="card-panel rounded-xl p-6 md:p-8 space-y-6">
+      <div class="border-b border-[#2c2c2c] pb-4">
+        <span class="px-2.5 py-0.5 rounded text-xs font-semibold bg-[#202020] text-[#e5a93c] border border-[#e5a93c]/30">
+          <i class="fa-solid fa-scale-balanced mr-1"></i> Core Quant Architecture
+        </span>
+        <h2 class="text-2xl font-bold text-[#f0f0f0] mt-2">
+          Tax-Hurdle &amp; Net-Profit Optimization (Why Pre-Tax Profits Can Become Post-Tax Losses)
+        </h2>
+        <p class="text-[#a3a3a3] text-sm mt-1 leading-relaxed max-w-4xl">
+          In Indian equity intraday (MIS) trading, gross trading performance shown on charting terminals is completely disconnected from real net bankable capital. Here is the rigorous breakdown of statutory drag, why micro-scalping guarantees ledger decay, and how our 2-Tier Tax-Shield Ratchet &amp; 4-Slot sizing protocol prevents green trades from ending in the red.
+        </p>
+      </div>
+
+      <!-- 3 Pillar Breakdown Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Pillar 1: The 0.113% Hurdle -->
+        <div class="card-panel-inner rounded-xl p-5 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#181818] text-[#e5a93c] border border-[#2c2c2c]">STATUTORY REALITY</span>
+              <span class="text-xs text-[#737373] mono">NSE MIS</span>
+            </div>
+            <h3 class="text-base font-bold text-[#f0f0f0] mb-2 flex items-center gap-2">
+              <i class="fa-solid fa-receipt text-[#e5a93c]"></i> The 0.113% Friction Hurdle
+            </h3>
+            <p class="text-[#a3a3a3] text-xs leading-relaxed mb-3">
+              On every intraday trade, the system incurs unavoidable government taxes and broker fees:
+            </p>
+            <div class="space-y-1.5 text-xs text-[#a3a3a3] mb-3">
+              <div class="flex justify-between border-b border-[#2c2c2c] pb-1">
+                <span>Brokerage (₹20 buy + ₹20 sell):</span>
+                <span class="mono text-[#f0f0f0]">₹40.00</span>
+              </div>
+              <div class="flex justify-between border-b border-[#2c2c2c] pb-1">
+                <span>STT (0.025% on sell side):</span>
+                <span class="mono text-[#f0f0f0]">₹41.50</span>
+              </div>
+              <div class="flex justify-between border-b border-[#2c2c2c] pb-1">
+                <span>Exchange Turnover + SEBI:</span>
+                <span class="mono text-[#f0f0f0]">₹10.19</span>
+              </div>
+              <div class="flex justify-between border-b border-[#2c2c2c] pb-1">
+                <span>GST (18% on fees):</span>
+                <span class="mono text-[#f0f0f0]">₹8.97</span>
+              </div>
+              <div class="flex justify-between border-b border-[#2c2c2c] pb-1">
+                <span>Spread &amp; Latency Slippage (0.05%):</span>
+                <span class="mono text-[#f0f0f0]">₹83.00</span>
+              </div>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-[#2c2c2c]">
+            <div class="flex justify-between items-center text-xs font-bold">
+              <span class="text-[#ef4444]">Total Hurdle (~₹1.66L):</span>
+              <span class="mono text-[#ef4444]">~₹183.66 (0.113%)</span>
+            </div>
+            <p class="text-[11px] text-[#737373] mt-1.5">
+              Any trade returning less than <strong>+0.113% gross</strong> is a guaranteed cash deficit to your trading account.
+            </p>
+          </div>
+        </div>
+
+        <!-- Pillar 2: Case Study PHOENIXLTD -->
+        <div class="card-panel-inner rounded-xl p-5 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#181818] text-[#ef4444] border border-[#ef4444]/30">CASE STUDY</span>
+              <span class="text-xs text-[#737373] mono">Real Market Telemetry</span>
+            </div>
+            <h3 class="text-base font-bold text-[#f0f0f0] mb-2 flex items-center gap-2">
+              <i class="fa-solid fa-triangle-exclamation text-[#ef4444]"></i> The PHOENIXLTD Trap
+            </h3>
+            <p class="text-[#a3a3a3] text-xs leading-relaxed mb-3">
+              Consider a real intraday trade in <strong class="text-[#f0f0f0] mono">PHOENIXLTD</strong> with ₹1,66,000 position capital:
+            </p>
+            <div class="space-y-1.5 text-xs text-[#a3a3a3] mb-3">
+              <div class="flex justify-between border-b border-[#2c2c2c] pb-1">
+                <span>Entry Price &rarr; Exit Price:</span>
+                <span class="mono text-[#f0f0f0]">₹1,550.00 &rarr; ₹1,551.10</span>
+              </div>
+              <div class="flex justify-between border-b border-[#2c2c2c] pb-1">
+                <span>Gross Move:</span>
+                <span class="mono text-emerald-400 font-semibold">+0.071%</span>
+              </div>
+              <div class="flex justify-between border-b border-[#2c2c2c] pb-1">
+                <span>Terminal Gross Profit:</span>
+                <span class="mono text-emerald-400 font-bold">+₹111.00</span>
+              </div>
+              <div class="flex justify-between border-b border-[#2c2c2c] pb-1">
+                <span>Total Statutory &amp; Slip Drag:</span>
+                <span class="mono text-[#ef4444] font-semibold">-₹187.36</span>
+              </div>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-[#2c2c2c]">
+            <div class="flex justify-between items-center text-xs font-bold">
+              <span class="text-[#ef4444]">Realized Ledger Impact:</span>
+              <span class="mono text-[#ef4444] text-sm">-₹76.36 (LOSS)</span>
+            </div>
+            <p class="text-[11px] text-[#737373] mt-1.5">
+              The terminal showed green, but your account balance decreased. Systems celebrating micro-gains run a charity for the tax office.
+            </p>
+          </div>
+        </div>
+
+        <!-- Pillar 3: The 2-Tier Ratchet & 4-Slot Fix -->
+        <div class="card-panel-inner rounded-xl p-5 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#181818] text-emerald-400 border border-emerald-500/30">QUANT SOLUTION</span>
+              <span class="text-xs text-[#737373] mono">V6.2 Architecture</span>
+            </div>
+            <h3 class="text-base font-bold text-[#f0f0f0] mb-2 flex items-center gap-2">
+              <i class="fa-solid fa-shield-check text-emerald-400"></i> Ratchet &amp; Sizing Shield
+            </h3>
+            <p class="text-[#a3a3a3] text-xs leading-relaxed mb-3">
+              We mathematically eliminate the trap through a combined execution shield:
+            </p>
+            <div class="space-y-2 text-xs text-[#a3a3a3] mb-3">
+              <div class="p-2 rounded bg-[#181818] border border-[#2c2c2c]">
+                <strong class="text-[#e5a93c]">Tier 1 (+0.45% MFE):</strong> Once price reaches +0.45%, SL immediately ratchets to <strong>Breakeven +0.15%</strong>. Reversals lock in net green cash after all fees.
+              </div>
+              <div class="p-2 rounded bg-[#181818] border border-[#2c2c2c]">
+                <strong class="text-emerald-400">Tier 2 (+0.75% MFE):</strong> Switches to dynamic high-water mark trailing <strong>55% of MFE</strong>, letting winning runners surge without clipping them early.
+              </div>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-[#2c2c2c]">
+            <div class="flex justify-between items-center text-xs font-bold">
+              <span class="text-emerald-400">4-Slot Brokerage Dilution:</span>
+              <span class="mono text-emerald-400">-33.3% Drag</span>
+            </div>
+            <p class="text-[11px] text-[#737373] mt-1.5">
+              ₹2.5L/slot dilutes fixed brokerage to 0.016%, guaranteeing net post-tax expectancy.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Comparative Slot Sizing Table -->
+      <div class="card-panel-inner rounded-xl p-5 overflow-x-auto">
+        <h4 class="text-sm font-bold text-[#f0f0f0] mb-3 flex items-center gap-2">
+          <i class="fa-solid fa-table-columns text-[#e5a93c]"></i> Capital Concentration Comparison: 6-Slot (₹1.66L) vs 4-Slot (₹2.50L) on ₹10L Account
+        </h4>
+        <table class="w-full text-xs text-left">
+          <thead>
+            <tr class="border-b border-[#2c2c2c] text-[#737373] font-semibold">
+              <th class="py-2.5 px-3">Quantitative Metric</th>
+              <th class="py-2.5 px-3">6-Slot Model (₹1.66L / Trade)</th>
+              <th class="py-2.5 px-3">4-Slot Model (₹2.50L / Trade)</th>
+              <th class="py-2.5 px-3 text-[#e5a93c]">Quant Structural Advantage</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[#2c2c2c] text-[#a3a3a3]">
+            <tr>
+              <td class="py-2.5 px-3 font-semibold text-[#f0f0f0]">Fixed Brokerage Cost (₹40 round trip)</td>
+              <td class="py-2.5 px-3 mono">0.0241% of capital</td>
+              <td class="py-2.5 px-3 mono text-emerald-400 font-semibold">0.0160% of capital</td>
+              <td class="py-2.5 px-3 text-emerald-400 font-semibold"><i class="fa-solid fa-arrow-down mr-1"></i> 33.6% reduction in fixed broker drag</td>
+            </tr>
+            <tr>
+              <td class="py-2.5 px-3 font-semibold text-[#f0f0f0]">Total Statutory + Slippage Hurdle</td>
+              <td class="py-2.5 px-3 mono">0.121% (₹201 per trade)</td>
+              <td class="py-2.5 px-3 mono text-emerald-400 font-semibold">0.113% (₹282 per trade)</td>
+              <td class="py-2.5 px-3 text-[#f0f0f0]">Lower percentage breakeven threshold needed</td>
+            </tr>
+            <tr>
+              <td class="py-2.5 px-3 font-semibold text-[#f0f0f0]">Gross Profit on +1.20% Target</td>
+              <td class="py-2.5 px-3 mono">₹1,992.00</td>
+              <td class="py-2.5 px-3 mono text-emerald-400 font-semibold">₹3,000.00</td>
+              <td class="py-2.5 px-3 text-emerald-400 font-semibold"><i class="fa-solid fa-arrow-up mr-1"></i> +₹1,008 (+50.6%) gross yield per winner</td>
+            </tr>
+            <tr>
+              <td class="py-2.5 px-3 font-semibold text-[#f0f0f0]">Net Profit Retained After Friction</td>
+              <td class="py-2.5 px-3 mono">₹1,791.00 (89.9%)</td>
+              <td class="py-2.5 px-3 mono text-emerald-400 font-semibold">₹2,718.00 (90.6%)</td>
+              <td class="py-2.5 px-3 text-emerald-400 font-semibold">+0.7% higher net efficiency retained</td>
+            </tr>
+            <tr>
+              <td class="py-2.5 px-3 font-semibold text-[#f0f0f0]">Capital Concentration Discipline</td>
+              <td class="py-2.5 px-3">Diluted into 5th &amp; 6th ranked marginal setups</td>
+              <td class="py-2.5 px-3 text-emerald-400 font-semibold">Strictly focused on Top 4 Alpha leaders</td>
+              <td class="py-2.5 px-3 text-[#e5a93c]">Eliminates low-conviction marginal trades</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION: INTERACTIVE EXPECTANCY & FRICTION CALCULATOR -->
+    <section id="calculator" class="card-panel rounded-xl p-6 md:p-8 space-y-6">
+      <div class="border-b border-[#2c2c2c] pb-4">
+        <span class="px-2.5 py-0.5 rounded text-xs font-semibold bg-[#202020] text-[#e5a93c] border border-[#e5a93c]/30">
+          <i class="fa-solid fa-coins mr-1"></i> Interactive Quant Tool
+        </span>
+        <h2 class="text-2xl font-bold text-[#f0f0f0] mt-2">
+          Indian Intraday Friction &amp; Expectancy Calculator
+        </h2>
+        <p class="text-[#a3a3a3] text-sm mt-1 leading-relaxed">
+          Test your hypothesis about <em>"shorter trades for small micro-profits"</em> vs <em>"holding for clean target expansions"</em>. See exactly how Indian statutory taxes (STT, GST, SEBI, Exchange) and broker commissions determine your net ledger P&amp;L.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Controls Column -->
+        <div class="space-y-4 card-panel-inner p-5 rounded-xl">
+          <div>
+            <div class="flex justify-between text-xs font-semibold text-[#a3a3a3] mb-1">
+              <span>Capital Traded per Position:</span>
+              <span class="text-[#e5a93c] mono font-bold" id="dispCapital">₹2,50,000</span>
+            </div>
+            <input type="range" id="inpCapital" min="20000" max="500000" step="10000" value="250000" class="w-full" oninput="calcExpectancy()">
+          </div>
+
+          <div>
+            <div class="flex justify-between text-xs font-semibold text-[#a3a3a3] mb-1">
+              <span>Profit Target %:</span>
+              <span class="text-emerald-400 mono font-bold" id="dispTarget">1.2%</span>
+            </div>
+            <input type="range" id="inpTarget" min="0.2" max="3.5" step="0.1" value="1.2" class="w-full" oninput="calcExpectancy()">
+          </div>
+
+          <div>
+            <div class="flex justify-between text-xs font-semibold text-[#a3a3a3] mb-1">
+              <span>Stop Loss %:</span>
+              <span class="text-[#ef4444] mono font-bold" id="dispStop">1.0%</span>
+            </div>
+            <input type="range" id="inpStop" min="0.2" max="2.5" step="0.1" value="1.0" class="w-full" oninput="calcExpectancy()">
+          </div>
+
+          <div>
+            <div class="flex justify-between text-xs font-semibold text-[#a3a3a3] mb-1">
+              <span>Estimated Win Rate %:</span>
+              <span class="text-[#e5a93c] mono font-bold" id="dispWinRate">45%</span>
+            </div>
+            <input type="range" id="inpWinRate" min="25" max="80" step="1" value="45" class="w-full" oninput="calcExpectancy()">
+          </div>
+
+          <div>
+            <div class="flex justify-between text-xs font-semibold text-[#a3a3a3] mb-1">
+              <span>Trades Placed Per Day:</span>
+              <span class="text-[#f0f0f0] mono font-bold" id="dispTrades">3 trades</span>
+            </div>
+            <input type="range" id="inpTrades" min="1" max="30" step="1" value="3" class="w-full" oninput="calcExpectancy()">
+          </div>
+        </div>
+
+        <!-- Cost Breakdown Table -->
+        <div class="card-panel-inner p-5 rounded-xl flex flex-col justify-between">
+          <div>
+            <h4 class="text-sm font-bold text-[#f0f0f0] mb-3 flex items-center gap-2">
+              <i class="fa-solid fa-receipt text-[#e5a93c]"></i> Indian Statutory Friction per Trade
+            </h4>
+            <div class="space-y-2 text-xs">
+              <div class="flex justify-between py-1 border-b border-[#2c2c2c] text-[#a3a3a3]">
+                <span>Brokerage (₹20 buy + ₹20 sell):</span>
+                <span class="mono text-[#f0f0f0]">₹40.00</span>
+              </div>
+              <div class="flex justify-between py-1 border-b border-[#2c2c2c] text-[#a3a3a3]">
+                <span>STT (0.025% on Sell turnover):</span>
+                <span class="mono text-[#f0f0f0]" id="costSTT">₹62.50</span>
+              </div>
+              <div class="flex justify-between py-1 border-b border-[#2c2c2c] text-[#a3a3a3]">
+                <span>NSE Turnover Charges (0.00297%):</span>
+                <span class="mono text-[#f0f0f0]" id="costNSE">₹14.85</span>
+              </div>
+              <div class="flex justify-between py-1 border-b border-[#2c2c2c] text-[#a3a3a3]">
+                <span>SEBI Fees + Stamp Duty (0.003%):</span>
+                <span class="mono text-[#f0f0f0]" id="costSEBI">₹8.00</span>
+              </div>
+              <div class="flex justify-between py-1 border-b border-[#2c2c2c] text-[#a3a3a3]">
+                <span>GST (18% on Brokerage &amp; Exchange):</span>
+                <span class="mono text-[#f0f0f0]" id="costGST">₹9.87</span>
+              </div>
+              <div class="flex justify-between py-1 border-b border-[#2c2c2c] text-[#a3a3a3]">
+                <span>Estimated Slippage (0.05% round trip):</span>
+                <span class="mono text-[#f0f0f0]" id="costSlippage">₹125.00</span>
+              </div>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-[#2c2c2c] flex justify-between text-xs font-bold">
+            <span class="text-[#ef4444]">Total Drag per Trade:</span>
+            <span class="mono text-[#ef4444]" id="costTotal">₹260.22 (~0.10%)</span>
+          </div>
+        </div>
+
+        <!-- Verdict & Net Outcome -->
+        <div class="card-panel-inner p-6 rounded-xl flex flex-col justify-between">
+          <div>
+            <h4 class="text-xs font-bold uppercase tracking-wider text-[#737373] mb-2">Simulated Monthly Net Result (20 Days)</h4>
+            
+            <div class="my-4">
+              <div class="text-3xl font-extrabold mono" id="outMonthlyNet">+₹24,850</div>
+              <div class="text-xs text-[#a3a3a3] mt-1" id="outFrictionSum">Total Fees Paid to Broker &amp; Govt: ₹15,613</div>
+            </div>
+
+            <div class="space-y-2 text-xs pt-3 border-t border-[#2c2c2c]">
+              <div class="flex justify-between">
+                <span class="text-[#a3a3a3]">Realized Payoff Ratio:</span>
+                <span class="mono font-semibold text-[#f0f0f0]" id="outPayoff">1.09 : 1</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-[#a3a3a3]">Breakeven Win Rate Needed:</span>
+                <span class="mono font-semibold text-[#e5a93c]" id="outBreakeven">47.8%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-3 rounded-lg text-xs font-medium mt-4" id="outVerdictBox">
+            <!-- Dynamic verdict injected via JS -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: GEOPOLITICAL SHOCK / BLACK SWAN SIMULATOR -->
+    <section id="shock-simulator" class="card-panel rounded-xl p-6 md:p-8 space-y-6">
+      <div class="border-b border-[#2c2c2c] pb-4">
+        <span class="px-2.5 py-0.5 rounded text-xs font-semibold bg-[#202020] text-[#ef4444] border border-[#ef4444]/30">
+          <i class="fa-solid fa-bomb mr-1"></i> Quant Risk Breakdown
+        </span>
+        <h2 class="text-2xl font-bold text-[#f0f0f0] mt-2">
+          The "Trump War Headline" Problem: 5-Minute Polling vs Real-Time Circuit Breaker
+        </h2>
+        <p class="text-[#a3a3a3] text-sm mt-1 leading-relaxed">
+          Why did batch-polling algorithms get crushed when sudden geopolitical headlines struck? Here is the visual proof of why 5-minute candles are too slow for sudden shocks, and how hedge funds physically prevent this disaster.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Left: The Flawed Current Method -->
+        <div class="p-5 rounded-xl bg-[#181818] border border-[#2c2c2c] space-y-3">
+          <div class="flex items-center gap-2 text-[#ef4444] font-bold text-sm">
+            <i class="fa-solid fa-triangle-exclamation"></i> CURRENT BOT (5-Minute Batch Polling)
+          </div>
+          <div class="space-y-2 text-xs text-[#a3a3a3]">
+            <div class="p-2.5 rounded bg-[#202020] border border-[#2c2c2c]">
+              <strong class="text-[#f0f0f0]">11:00:00 AM:</strong> Bot runs 5m loop. Position in <code class="text-[#e5a93c] mono">COCHINSHIP</code> is healthy @ ₹1,200 (Stop Loss at ₹1,188 = -1.0%). Bot sleeps for 5 minutes.
+            </div>
+            <div class="p-2.5 rounded bg-[#202020] border border-[#ef4444]/40">
+              <strong class="text-[#ef4444]">11:02:15 AM (SHOCK):</strong> Sudden geopolitical tweet/bombing headline. HFT bots dump the market in 12 seconds. Price drops from ₹1,200 to ₹1,165 (-2.9%).
+            </div>
+            <div class="p-2.5 rounded bg-[#202020] border border-[#2c2c2c]">
+              <strong class="text-[#f0f0f0]">11:05:00 AM:</strong> Bot finally wakes up! Sees price is ₹1,165. Slices stop loss, sends market exit order.
+            </div>
+            <div class="p-2.5 rounded bg-[#202020] border border-[#ef4444]/60 font-semibold text-[#ef4444]">
+              <strong>RESULT:</strong> Instead of losing ₹12 (-1.0%), you lost ₹35 (-2.9%). The 5-minute polling window left you completely blind while the building was on fire.
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: The Institutional Solution -->
+        <div class="p-5 rounded-xl bg-[#181818] border border-[#2c2c2c] space-y-3">
+          <div class="flex items-center gap-2 text-emerald-400 font-bold text-sm">
+            <i class="fa-solid fa-shield-check"></i> QUANT SOLUTION (Hard Exchange Stop + 1s Velocity Gate)
+          </div>
+          <div class="space-y-2 text-xs text-[#a3a3a3]">
+            <div class="p-2.5 rounded bg-[#202020] border border-[#2c2c2c]">
+              <strong class="text-[#f0f0f0]">1. Hard Broker-Level SL Order (Exchange Co-location):</strong> Don't keep the Stop Loss in Python memory! Place an actual <code class="text-emerald-400 mono">SL-M</code> order directly on the NSE exchange at ₹1,188 immediately at entry.
+            </div>
+            <div class="p-2.5 rounded bg-[#202020] border border-emerald-500/40">
+              <strong class="text-emerald-400">2. Real-Time Index Velocity Gate (1-Second):</strong> Connect to the FYERS WebSocket tick feed. If Nifty drops &gt; 0.4% in 30 seconds or India VIX spikes &gt; 4%:
+            </div>
+            <div class="p-2.5 rounded bg-[#202020] border border-[#2c2c2c]">
+              <strong class="text-[#f0f0f0]">GLOBAL CIRCUIT BREAKER:</strong>
+              <ul class="list-disc list-inside mt-1 space-y-0.5 text-[#a3a3a3]">
+                <li>Instant cancel of all resting limit buy orders (stops you from catching falling knives).</li>
+                <li>Tightens trailing stops on all winning trades to protect profit.</li>
+              </ul>
+            </div>
+            <div class="p-2.5 rounded bg-[#202020] border border-emerald-500/60 font-semibold text-emerald-400">
+              <strong>RESULT:</strong> The exchange matching engine cuts your loss at exactly ₹1,188 within 10 milliseconds of price touching it, before catastrophic cascade.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="max-w-7xl mx-auto mt-12 pt-6 border-t border-[#2c2c2c] text-center text-xs text-[#737373]">
+    AI BTB Dashboard &amp; Cockpit V6 System Documentation &bull; Built for Rishi &bull; Safe Simulation Mode Active
+  </footer>
+
+  <!-- Interactive JavaScript Logic -->
+  <script>
+    // Filtering logic for Term Cards
+    let activeCategory = 'all';
+
+    function setCategory(cat) {
+      activeCategory = cat;
+      document.querySelectorAll('.cat-btn').forEach(btn => {
+        if (btn.getAttribute('data-cat') === cat) {
+          btn.classList.add('tab-active');
+        } else {
+          btn.classList.remove('tab-active');
+        }
+      });
+      filterTerms();
+    }
+
+    function filterTerms() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      const cards = document.querySelectorAll('.term-card');
+
+      cards.forEach(card => {
+        const categories = card.getAttribute('data-cat').split(' ');
+        const keywords = card.getAttribute('data-keywords').toLowerCase();
+        const text = card.innerText.toLowerCase();
+
+        const matchesCat = (activeCategory === 'all' || categories.includes(activeCategory));
+        const matchesQuery = (query === '' || keywords.includes(query) || text.includes(query));
+
+        if (matchesCat && matchesQuery) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Expectancy Calculator Logic
+    function calcExpectancy() {
+      const capital = parseFloat(document.getElementById('inpCapital').value);
+      const targetPct = parseFloat(document.getElementById('inpTarget').value) / 100.0;
+      const stopPct = parseFloat(document.getElementById('inpStop').value) / 100.0;
+      const winRate = parseFloat(document.getElementById('inpWinRate').value) / 100.0;
+      const tradesPerDay = parseInt(document.getElementById('inpTrades').value);
+
+      // Display inputs
+      document.getElementById('dispCapital').innerText = '₹' + capital.toLocaleString('en-IN');
+      document.getElementById('dispTarget').innerText = (targetPct * 100).toFixed(1) + '%';
+      document.getElementById('dispStop').innerText = (stopPct * 100).toFixed(1) + '%';
+      document.getElementById('dispWinRate').innerText = (winRate * 100).toFixed(0) + '%';
+      document.getElementById('dispTrades').innerText = tradesPerDay + (tradesPerDay === 1 ? ' trade' : ' trades');
+
+      // Calculate Statutory Costs on Indian Equity Intraday MIS
+      // Turnover = Buy Value + Sell Value
+      const buyTurnover = capital;
+      const sellTurnover = capital * (1 + (targetPct * winRate - stopPct * (1 - winRate)));
+      const avgTurnover = (buyTurnover + sellTurnover) / 2;
+
+      const brokerage = 40.0; // ₹20 each side
+      const stt = sellTurnover * 0.00025; // 0.025% on sell
+      const nse = (buyTurnover + sellTurnover) * 0.0000297; // 0.00297%
+      const sebi = (buyTurnover + sellTurnover) * 0.000001 + (buyTurnover * 0.00003); // SEBI + stamp
+      const gst = (brokerage + nse) * 0.18; // 18% on fees
+      const slippage = avgTurnover * 0.0005; // 0.05% slippage
+
+      const totalFrictionPerTrade = brokerage + stt + nse + sebi + gst + slippage;
+      const frictionPct = totalFrictionPerTrade / capital;
+
+      // Update cost elements
+      document.getElementById('costSTT').innerText = '₹' + stt.toFixed(2);
+      document.getElementById('costNSE').innerText = '₹' + nse.toFixed(2);
+      document.getElementById('costSEBI').innerText = '₹' + sebi.toFixed(2);
+      document.getElementById('costGST').innerText = '₹' + gst.toFixed(2);
+      document.getElementById('costSlippage').innerText = '₹' + slippage.toFixed(2);
+      document.getElementById('costTotal').innerText = '₹' + totalFrictionPerTrade.toFixed(2) + ' (' + (frictionPct * 100).toFixed(2) + '%)';
+
+      // Realized math per trade
+      const netWin = (capital * targetPct) - totalFrictionPerTrade;
+      const netLoss = (capital * stopPct) + totalFrictionPerTrade;
+      const payoffRatio = netWin / netLoss;
+      const breakevenWinRate = netLoss / (netWin + netLoss);
+
+      // Monthly simulation (20 trading days)
+      const totalTradesMonth = tradesPerDay * 20;
+      const monthlyExpectedNet = totalTradesMonth * ((winRate * netWin) - ((1 - winRate) * netLoss));
+      const monthlyFees = totalTradesMonth * totalFrictionPerTrade;
+
+      // Render Outputs
+      const netElem = document.getElementById('outMonthlyNet');
+      if (monthlyExpectedNet >= 0) {
+        netElem.innerText = '+₹' + Math.round(monthlyExpectedNet).toLocaleString('en-IN');
+        netElem.className = 'text-3xl font-extrabold mono text-emerald-400';
+      } else {
+        netElem.innerText = '-₹' + Math.round(Math.abs(monthlyExpectedNet)).toLocaleString('en-IN');
+        netElem.className = 'text-3xl font-extrabold mono text-[#ef4444]';
+      }
+
+      document.getElementById('outFrictionSum').innerText = 'Total Fees Paid to Broker & Govt: ₹' + Math.round(monthlyFees).toLocaleString('en-IN');
+      document.getElementById('outPayoff').innerText = payoffRatio.toFixed(2) + ' : 1';
+      document.getElementById('outBreakeven').innerText = (breakevenWinRate * 100).toFixed(1) + '%';
+
+      // Verdict Box
+      const verdictBox = document.getElementById('outVerdictBox');
+      if (tradesPerDay >= 12 && targetPct <= 0.6) {
+        verdictBox.className = 'p-3 rounded-lg text-xs font-medium mt-4 bg-[#202020] border border-[#ef4444]/40 text-[#ef4444]';
+        verdictBox.innerHTML = '<i class="fa-solid fa-triangle-exclamation mr-1 text-[#ef4444]"></i> <strong>THE SCALPER\'S TRAP:</strong> You are taking ' + tradesPerDay + ' trades/day for tiny profits. Notice how ₹' + Math.round(monthlyFees).toLocaleString('en-IN') + ' goes straight to taxes and fees! Your breakeven win rate is over ' + (breakevenWinRate * 100).toFixed(0) + '%, which is mathematically almost impossible to sustain.';
+      } else if (monthlyExpectedNet > 0) {
+        verdictBox.className = 'p-3 rounded-lg text-xs font-medium mt-4 bg-[#202020] border border-emerald-500/40 text-emerald-400';
+        verdictBox.innerHTML = '<i class="fa-solid fa-circle-check mr-1 text-emerald-400"></i> <strong>HEALTHY QUANT PROFILE:</strong> Your profit target comfortably outpaces Indian statutory friction. The system generates positive mathematical expectancy over 20 trading sessions.';
+      } else {
+        verdictBox.className = 'p-3 rounded-lg text-xs font-medium mt-4 bg-[#202020] border border-[#e5a93c]/40 text-[#e5a93c]';
+        verdictBox.innerHTML = '<i class="fa-solid fa-circle-exclamation mr-1 text-[#e5a93c]"></i> <strong>NEGATIVE EXPECTANCY:</strong> At a ' + (winRate * 100).toFixed(0) + '% win rate, this configuration will slowly lose capital. You need to increase your target or raise your win rate above ' + (breakevenWinRate * 100).toFixed(1) + '%.';
+      }
+    }
+
+    // Initialize calculator on load
+    calcExpectancy();
+  </script>
+</body>
+</html>
