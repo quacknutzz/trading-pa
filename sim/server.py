@@ -65,7 +65,15 @@ def backtest_report():
     rpt_path = os.path.join(OUT_DIR, "backtest_12week_report.json")
     if os.path.exists(rpt_path):
         with open(rpt_path, "r", encoding="utf-8") as f:
-            return JSONResponse(json.load(f))
+            data = json.load(f)
+            # Ensure Quacknutzz_Strat aliases are populated
+            if "totals" in data:
+                if "v6_profit_max" in data["totals"]:
+                    data["totals"]["quacknutzz_strat"] = data["totals"]["v6_profit_max"]
+                    data["optimized"] = data["totals"]["v6_profit_max"]
+                if "v6_baseline" in data["totals"]:
+                    data["baseline"] = data["totals"]["v6_baseline"]
+            return JSONResponse(data)
     return JSONResponse({"error": "Report not generated yet"})
 
 
@@ -118,6 +126,90 @@ async def trade_action(req: Request):
             return JSONResponse({"ok": True, "message": f"Cancelled pending limit order for {sym}"})
     return JSONResponse({"ok": False, "error": "Invalid action or target symbol not active"})
 
+
+
+@app.get("/api/timeline_data")
+def timeline_data(start_date: Optional[str] = None, end_date: Optional[str] = None, strategy: str = "quacknutzz_strat"):
+    global SIM, UNIVERSE
+    ensure_sim_loaded("live", None, strategy)
+    available = SIM.available_dates()
+    if not available:
+        return JSONResponse({"error": "No historical sessions available"})
+    
+    s_date = start_date or available[max(0, len(available) - 14)]
+    e_date = end_date or available[-1]
+    
+    target_dates = [d for d in available if s_date <= d <= e_date]
+    if not target_dates:
+        return JSONResponse({"error": f"No trading dates found between {s_date} and {e_date}", "available_dates": available})
+    
+    all_trades = []
+    daily_records = []
+    cum_equity = []
+    cum_net = 0.0
+    
+    # Run isolated simulation on target dates without touching live SIM state!
+    for d_str in target_dates:
+        dt = datetime.strptime(d_str, "%Y-%m-%d")
+        tmp = Simulator("replay", dt, strategy=strategy, starting_capital=C.STARTING_CAPITAL)
+        tmp.syms = SIM.syms
+        tmp.indices = SIM.indices
+        tmp.nifty_pos = SIM.nifty_pos
+        tmp.nifty_e10 = SIM.nifty_e10
+        tmp.nifty_e21 = SIM.nifty_e21
+        tmp.nifty_e30 = SIM.nifty_e30
+        
+        times = tmp.session_bar_times()
+        for t in times:
+            tmp.step(t)
+        
+        day_gross = sum(c["gross"] for c in tmp.closed)
+        day_fees = sum(c["costs"] for c in tmp.closed)
+        day_net = sum(c["net"] for c in tmp.closed)
+        day_wins = sum(1 for c in tmp.closed if c["net"] > 0)
+        
+        cum_net += day_net
+        cum_equity.append({"date": d_str, "net": round(day_net, 2), "total": round(cum_net, 2)})
+        
+        daily_records.append({
+            "date": d_str,
+            "trades": len(tmp.closed),
+            "wins": day_wins,
+            "win_rate": round(day_wins / len(tmp.closed) * 100, 1) if tmp.closed else 0.0,
+            "gross": round(day_gross, 2),
+            "fees": round(day_fees, 2),
+            "net": round(day_net, 2),
+        })
+        for c in tmp.closed:
+            trade_copy = dict(c)
+            trade_copy["date"] = d_str
+            all_trades.append(trade_copy)
+    
+    tot_gross = sum(d["gross"] for d in daily_records)
+    tot_fees = sum(d["fees"] for d in daily_records)
+    tot_net = sum(d["net"] for d in daily_records)
+    tot_trades = len(all_trades)
+    tot_wins = sum(1 for t in all_trades if t["net"] > 0)
+    
+    return JSONResponse({
+        "start_date": s_date,
+        "end_date": e_date,
+        "days_count": len(target_dates),
+        "available_dates": available,
+        "strategy": strategy,
+        "kpi": {
+            "trades": tot_trades,
+            "wins": tot_wins,
+            "losses": tot_trades - tot_wins,
+            "win_rate": round(tot_wins / tot_trades * 100, 1) if tot_trades else 0.0,
+            "gross": round(tot_gross, 2),
+            "fees": round(tot_fees, 2),
+            "net": round(tot_net, 2),
+        },
+        "daily": daily_records[::-1],
+        "trades": all_trades[::-1],
+        "equity_curve": cum_equity,
+    })
 
 
 @app.post("/api/control")
@@ -237,6 +329,9 @@ def run_live(strategy: str = C.DEFAULT_STRATEGY, capital: Optional[float] = None
         if now.time() < dtime(9, 14):
             SIM.status = f"WAITING FOR NSE MARKET OPEN (09:15 IST) - Current time {now:%H:%M:%S}"
             time.sleep(15); continue
+        if now.time() > dtime(15, 30):
+            SIM.status = "NSE MARKET CLOSED (15:30 IST) - Switch to Replay Mode to review past sessions"
+            time.sleep(60); continue
         try:
             ys = [u["yahoo"] for u in UNIVERSE] + list(C.INDEX_TICKERS.values())
             fresh = datafeed.fetch(ys, period="1d")
