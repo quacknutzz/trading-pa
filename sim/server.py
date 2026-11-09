@@ -31,6 +31,7 @@ from simulator import Simulator, BAR
 
 from fastapi import FastAPI, Request
 from fastapi.responses import FileResponse, JSONResponse, HTMLResponse, RedirectResponse
+from fastapi.staticfiles import StaticFiles
 import uvicorn
 
 OUT_DIR = os.path.join(SIM_DIR, "journal")
@@ -51,11 +52,14 @@ def get_timeline_cache():
 os.makedirs(OUT_DIR, exist_ok=True)
 
 app = FastAPI()
+app.mount("/static", StaticFiles(directory=os.path.join(SIM_DIR, "static")), name="static")
 SIM: Simulator = None
 UNIVERSE = None
 CACHED_DATA = None
 CACHED_IDX = None
 LIVE_THREAD_ACTIVE = False
+PORTAL_MODE = "live"       # "live" (Real Fyers Terminal) or "simulation" (Forward-Test Sandbox)
+SERVER_PORT = C.SERVER_PORT # Default 8765
 
 
 @app.get("/")
@@ -65,7 +69,67 @@ def index():
 
 @app.get("/api/state")
 def state():
-    return JSONResponse(SIM.snapshot() if SIM else {"status": "STARTING"})
+    if not SIM:
+        return JSONResponse({"status": "STARTING"})
+    snap = SIM.snapshot()
+    
+    with SIM.lock:
+        stock_invested = round(sum(p["entry"] * p["qty"] for p in SIM.open.values()), 2)
+        realized = round(SIM.cash_realized, 2)
+        fees = round(SIM.fees, 2)
+        unrealized = round(SIM.unrealized(), 2)
+        
+        fyers_bal = FYERS_PROFILE_CACHE.get("balance", 0.0)
+        fyers_name = FYERS_PROFILE_CACHE.get("name", "")
+        fyers_id = FYERS_PROFILE_CACHE.get("fy_id", "")
+        root_path = os.path.dirname(SIM_DIR)
+        has_token = os.path.exists(os.path.join(root_path, "fyers_tokens.json"))
+        
+        snap["portal_mode"] = PORTAL_MODE
+        snap["portal_port"] = SERVER_PORT
+        snap["portal_label"] = "FYERS LIVE BROKERAGE" if PORTAL_MODE == "live" else "QUACKNUTZZ FORWARD-TEST SANDBOX"
+        
+        if PORTAL_MODE == "live":
+            if fyers_bal > 0:
+                liquid_cash = round(fyers_bal - stock_invested, 2)
+                net_equity = round(fyers_bal + unrealized, 2)
+            else:
+                liquid_cash = 0.0
+                stock_invested = 0.0
+                net_equity = 0.0
+                snap["open"] = []
+                snap["pending"] = []
+                snap["closed"] = []
+                realized = 0.0
+                fees = 0.0
+                unrealized = 0.0
+                snap["kpi"]["trades"] = 0
+                snap["kpi"]["wins"] = 0
+                snap["kpi"]["win_rate"] = None
+                snap["status"] = "CONNECTED (FYERS LIVE) • Awaiting Demat Capital Deposit • Connect Funds via FYERS UPI/NetBanking"
+        else:
+            # Forward-Test Sandbox Mode (Port 8766)
+            liquid_cash = round(SIM.starting_capital - stock_invested + realized - fees, 2)
+            net_equity = round(SIM.starting_capital + realized - fees + unrealized, 2)
+            
+        snap["kpi"]["liquid_cash"] = liquid_cash
+        snap["kpi"]["stock_invested"] = stock_invested
+        snap["kpi"]["net_equity"] = net_equity
+        snap["kpi"]["fyers_balance"] = fyers_bal
+        snap["kpi"]["realized"] = realized
+        snap["kpi"]["fees"] = fees
+        snap["kpi"]["unrealized"] = unrealized
+        
+        snap["broker"] = {
+            "connected": has_token,
+            "name": fyers_name or ("RISHI KANNAN" if has_token else ""),
+            "fy_id": fyers_id or ("FAL34251" if has_token else ""),
+            "balance": fyers_bal,
+            "mode": "LIVE" if (has_token and PORTAL_MODE == "live") else "SANDBOX (SIMULATION)",
+            "broker": "FYERS API v3"
+        }
+        
+    return JSONResponse(snap)
 
 
 @app.get("/api/chart/{symbol}")
@@ -90,33 +154,90 @@ def backtest_report():
     return JSONResponse({"error": "Report not generated yet"})
 
 
+FYERS_PROFILE_CACHE = {"ts": 0, "name": "", "fy_id": "", "balance": 0.0}
+
+def fetch_fyers_balance_direct(app_id: str, token: str, timeout: int = 5) -> Optional[float]:
+    import requests
+    try:
+        headers = {"Authorization": f"{app_id}:{token}"}
+        resp = requests.get("https://api-t1.fyers.in/api/v3/funds", headers=headers, timeout=timeout)
+        if resp.status_code == 200:
+            data = resp.json()
+            if data.get("s") == "ok":
+                flist = data.get("fund_limit", [])
+                for item in flist:
+                    t = str(item.get("title", "")).lower()
+                    if "available" in t or item.get("id") == 6:
+                        return float(item.get("equityAmount", 0.0))
+                    elif "total" in t:
+                        return float(item.get("equityAmount", 0.0))
+                if flist:
+                    return float(flist[0].get("equityAmount", 0.0))
+                return 0.0
+    except Exception:
+        pass
+    return None
+
 @app.get("/api/fyers/status")
 def fyers_status():
+    global FYERS_PROFILE_CACHE, SIM
     from engine.data_engine import load_fyers_credentials
     root_path = os.path.dirname(SIM_DIR)
     app_id, token = load_fyers_credentials(root_path)
     token_file = os.path.join(root_path, "fyers_tokens.json")
     has_token = bool(app_id and token)
-    name = ""
-    fy_id = ""
-    balance = 0.0
+    
+    if not has_token:
+        FYERS_PROFILE_CACHE = {"ts": 0, "name": "", "fy_id": "", "balance": 0.0}
+        return JSONResponse({
+            "configured": os.path.exists(token_file),
+            "connected": False,
+            "app_id": "",
+            "name": "",
+            "fy_id": "",
+            "balance": 0.0,
+            "mode": "PAPER",
+            "broker": "FYERS API v3",
+        })
 
-    if has_token:
-        try:
-            from fyers_apiv3 import fyersModel
-            client = fyersModel.FyersModel(client_id=app_id, token=token, log_path=None)
-            prof = client.get_profile()
-            if prof.get("s") == "ok":
-                data = prof.get("data", {})
-                name = data.get("name", "")
-                fy_id = data.get("fy_id", "")
-            funds = client.funds()
-            if funds.get("s") == "ok":
-                flist = funds.get("fund_limit", [])
-                if flist:
-                    balance = flist[0].get("equityAmount", 0.0)
-        except Exception:
-            pass
+    now = time.time()
+    if now - FYERS_PROFILE_CACHE["ts"] < 60 and FYERS_PROFILE_CACHE["name"]:
+        return JSONResponse({
+            "configured": True,
+            "connected": True,
+            "app_id": (app_id[:6] + "***") if app_id else "",
+            "name": FYERS_PROFILE_CACHE["name"],
+            "fy_id": FYERS_PROFILE_CACHE["fy_id"],
+            "balance": FYERS_PROFILE_CACHE["balance"],
+            "mode": "LIVE",
+            "broker": "FYERS API v3",
+        })
+
+    name = FYERS_PROFILE_CACHE.get("name", "")
+    fy_id = FYERS_PROFILE_CACHE.get("fy_id", "")
+    balance = FYERS_PROFILE_CACHE.get("balance", 0.0)
+
+    try:
+        from fyers_apiv3 import fyersModel
+        client = fyersModel.FyersModel(client_id=app_id, token=token, log_path=None)
+        prof = client.get_profile()
+        if prof.get("s") == "ok":
+            data = prof.get("data", {})
+            name = data.get("name", name)
+            fy_id = data.get("fy_id", fy_id)
+
+        def _update_funds():
+            bal = fetch_fyers_balance_direct(app_id, token, timeout=5)
+            if bal is not None:
+                FYERS_PROFILE_CACHE["balance"] = bal
+                if bal > 0 and SIM:
+                    with SIM.lock:
+                        SIM.starting_capital = bal
+
+        threading.Thread(target=_update_funds, daemon=True).start()
+        FYERS_PROFILE_CACHE = {"ts": now, "name": name, "fy_id": fy_id, "balance": balance}
+    except Exception:
+        pass
 
     return JSONResponse({
         "configured": os.path.exists(token_file),
@@ -127,6 +248,28 @@ def fyers_status():
         "balance": balance,
         "mode": "LIVE" if has_token else "PAPER",
         "broker": "FYERS API v3",
+    })
+
+
+@app.post("/api/fyers/sync_funds")
+def fyers_sync_funds():
+    global FYERS_PROFILE_CACHE, SIM
+    from engine.data_engine import load_fyers_credentials
+    root_path = os.path.dirname(SIM_DIR)
+    app_id, token = load_fyers_credentials(root_path)
+    if not (app_id and token):
+        return JSONResponse({"ok": False, "error": "Fyers credentials not found"})
+    bal = fetch_fyers_balance_direct(app_id, token, timeout=5)
+    if bal is not None:
+        FYERS_PROFILE_CACHE["balance"] = bal
+        if bal > 0 and SIM:
+            with SIM.lock:
+                SIM.starting_capital = bal
+        return JSONResponse({"ok": True, "balance": bal, "synced": True})
+    return JSONResponse({
+        "ok": False,
+        "error": "Could not connect to Fyers funds gateway (may be closed outside market hours)",
+        "balance": FYERS_PROFILE_CACHE.get("balance", 0.0)
     })
 
 
@@ -301,9 +444,19 @@ def timeline_data(start_date: Optional[str] = None, end_date: Optional[str] = No
     s_date = start_date or available[max(0, len(available) - 14)]
     e_date = end_date or available[-1]
     
+    if s_date > e_date:
+        s_date, e_date = e_date, s_date
+
     target_dates = [d for d in available if s_date <= d <= e_date]
     if not target_dates:
-        return JSONResponse({"error": f"No trading dates found between {s_date} and {e_date}", "available_dates": available})
+        try:
+            req_dt = datetime.strptime(s_date, "%Y-%m-%d")
+            closest = min(available, key=lambda d: abs((datetime.strptime(d, "%Y-%m-%d") - req_dt).total_seconds()))
+            target_dates = [closest]
+            s_date = closest
+            e_date = closest
+        except Exception:
+            return JSONResponse({"error": f"No trading dates found between {s_date} and {e_date}", "available_dates": available})
     
     cache = get_timeline_cache()
     all_trades = []
@@ -416,6 +569,12 @@ async def control(req: Request):
     """Switch strategy preset, replay date, capital, or live/replay mode on the fly from the browser UI."""
     global SIM, LIVE_THREAD_ACTIVE
     body = await req.json()
+    if body.get("action") == "set_capital":
+        new_capital = float(body.get("capital", C.STARTING_CAPITAL))
+        if SIM:
+            with SIM.lock:
+                SIM.starting_capital = new_capital
+        return JSONResponse({"ok": True, "capital": new_capital})
     new_strategy = body.get("strategy", SIM.strategy if SIM else C.DEFAULT_STRATEGY)
     new_mode = body.get("mode", SIM.mode if SIM else "replay")
     new_date_str = body.get("date")
@@ -555,20 +714,36 @@ def run_live(strategy: str = C.DEFAULT_STRATEGY, capital: Optional[float] = None
             SIM.status = "SESSION CLOSED (15:30 IST) - Final Journal Saved"
             write_journal(SIM)
             time.sleep(120); continue
-        SIM.status = f"LIVE PAPER TRADING ({C.STRATEGY_LABELS.get(SIM.strategy, SIM.strategy)})"
+        if PORTAL_MODE == "live":
+            fyers_bal = FYERS_PROFILE_CACHE.get("balance", 0.0)
+            if fyers_bal <= 0:
+                SIM.status = "CONNECTED (FYERS LIVE) • Awaiting Demat Capital Deposit • Connect Funds via FYERS UPI/NetBanking"
+            else:
+                SIM.status = f"FYERS LIVE BROKERAGE ACTIVE ({C.STRATEGY_LABELS.get(SIM.strategy, SIM.strategy)})"
+        else:
+            SIM.status = f"FORWARD-TEST SANDBOX ({C.STRATEGY_LABELS.get(SIM.strategy, SIM.strategy)}) • Live 5m Feed"
         write_journal(SIM)
         time.sleep(C.LIVE_POLL_SECONDS)
 
 
 def main():
+    global PORTAL_MODE, SERVER_PORT
     ap = argparse.ArgumentParser()
     ap.add_argument("--mode", choices=["live", "replay"], default="live")
+    ap.add_argument("--portal", choices=["live", "simulation"], default="live", help="live: real FYERS execution; simulation: forward-test sandbox")
+    ap.add_argument("--port", type=int, default=None, help="server port (default: 8765 for live, 8766 for simulation)")
     ap.add_argument("--date", help="replay date YYYY-MM-DD (default: last session)")
     ap.add_argument("--strategy", choices=list(C.STRATEGY_LABELS.keys()), default=C.DEFAULT_STRATEGY)
     ap.add_argument("--speed", type=float, default=0.0, help="replay seconds per 5m bar (0 = instant)")
     ap.add_argument("--no-browser", action="store_true")
     ap.add_argument("--no-server", action="store_true", help="replay only, print summary, exit")
     a = ap.parse_args()
+
+    PORTAL_MODE = a.portal
+    if a.port:
+        SERVER_PORT = a.port
+    else:
+        SERVER_PORT = 8765 if PORTAL_MODE == "live" else 8766
 
     if a.mode == "replay":
         date = datetime.strptime(a.date, "%Y-%m-%d") if a.date else None
@@ -580,15 +755,16 @@ def main():
         target(); return
     threading.Thread(target=target, daemon=True).start()
     if not a.no_browser:
-        threading.Timer(2.0, lambda: webbrowser.open(f"http://localhost:{C.SERVER_PORT}")).start()
-    print(f"Paper-trading terminal: http://localhost:{C.SERVER_PORT}  (Ctrl+C to stop)")
+        threading.Timer(2.0, lambda: webbrowser.open(f"http://localhost:{SERVER_PORT}")).start()
+    portal_desc = "FYERS Live Brokerage Terminal" if PORTAL_MODE == "live" else "Forward-Test Simulation Sandbox"
+    print(f"[{portal_desc}] running at http://localhost:{SERVER_PORT} (Ctrl+C to stop)")
     for attempt in range(15):
         try:
-            uvicorn.run(app, host="127.0.0.1", port=C.SERVER_PORT, log_level="warning")
+            uvicorn.run(app, host="127.0.0.1", port=SERVER_PORT, log_level="warning")
             break
         except OSError as e:
             if getattr(e, 'winerror', None) == 10048 or "10048" in str(e):
-                print(f"[Server] Port {C.SERVER_PORT} busy (waiting for socket release, attempt {attempt+1}/15)...")
+                print(f"[Server] Port {SERVER_PORT} busy (waiting for socket release, attempt {attempt+1}/15)...")
                 time.sleep(2)
             else:
                 raise

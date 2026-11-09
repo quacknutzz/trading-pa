@@ -76,18 +76,20 @@ Install dependencies:
 pip install pandas numpy numba yfinance openpyxl fyers-apiv3
 ```
 
-### 2. Launch the Web Simulation Cockpit (Zero Money Risk)
-Double-click `run_live_simulation.bat` or run:
-```bash
-python sim/server.py --mode live
-```
-Open your browser at: **[http://127.0.0.1:8765](http://127.0.0.1:8765)**
+### 2. 1-Click Launchers (Live Terminal & Forward-Test Sandbox)
 
-### 3. Replay a Historical Trading Session
-To review bar-by-bar execution from the previous trading day:
-Double-click `run_replay_last_session.bat` or run:
+- **`START_BOTH_PORTALS.bat`**: Launches both portals in parallel:
+  - **Live FYERS Terminal**: [http://localhost:8765](http://localhost:8765) (live orders or live tracking)
+  - **Forward-Test Sandbox**: [http://localhost:8766](http://localhost:8766) (zero-risk real-time forward test)
+- **`START_ENGINE.bat`**: Launches the Live Terminal on port 8765.
+- **`LAUNCH_SIMULATION_SANDBOX.bat`**: Launches the Sandbox on port 8766.
+- **`CHECK_STATUS.bat`**: Performs an instant health check on both ports, scheduler, and credentials.
+- **`STOP_ENGINE.bat`**: Stops all background instances immediately.
+- **`SETUP_AUTOSTART.bat`**: Sets up Windows Task Scheduler to automatically boot the engine at 09:00 AM IST on weekdays.
+
+Manual terminal command:
 ```bash
-python sim/server.py --mode replay --speed 0.25
+python sim/server.py --mode live --port 8765 --strategy quacknutzz_strat
 ```
 
 ### 4. Run Quantitative Backtests

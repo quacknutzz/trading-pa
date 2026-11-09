@@ -39,3 +39,7 @@ $RECYCLE.BIN/
 # Temporary files & crash dumps
 *.tmp
 *.bak
+
+# Daily session journals
+sim/journal/*.csv
+sim/journal/*.json
